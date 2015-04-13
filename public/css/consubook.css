@@ -1,0 +1,14 @@
+@media (min-width: 768px) {
+    
+    #consubook-btn-search {
+    	width: 300px;
+    }
+}
+
+@media (min-width: 992px) {
+    
+    #consubook-btn-search {
+    	width: 400px;
+    }
+}
+

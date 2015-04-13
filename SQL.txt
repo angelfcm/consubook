@@ -1,0 +1,16 @@
+CREATE DATABASE consubook COLLATE 'utf8_unicode_ci';
+
+USE consubook;
+
+CREATE TABLE cbk_user_group (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	name VARCHAR(64) NOT NULL,
+	permission TEXT
+);
+
+
+CREATE TABLE cbk_user_account (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	name VARCHAR(64) NOT NULL,
+	permission TEXT
+);

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html ng-app="consubook">
+	<head>
+		<meta name="viewport" content="width=device-width, user-scalable=no">
+		<title>Consubook</title>
+
+<?php $this->assets->outputCss(); ?>
+	</head>
+	<body ng-controller="test">
+		<nav class="navbar navbar-default">
+			<div class="container">
+		    	<!-- Brand and toggle get grouped for better mobile display -->
+		    	<div class="navbar-header">
+	      			<a class="navbar-brand" href="#">Consubook!</a>
+   			 	</div>
+   			 	<form class="navbar-form navbar-left" role="search">
+					<div class="form-group">
+					    <div class="input-group">
+					    	<span class="input-group-btn">
+					    		<button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+					    			<span class="glyphicon glyphicon-chevron-down"></span>
+					    		</button>
+					    		<ul class="dropdown-menu">
+									<div class="btn-group" data-toggle="buttons">
+									  	<label class="btn btn-primary active">
+									   		<input type="radio" name="search-by" value="title" autocomplete="off" checked>Título
+									  	</label>
+									  	<label class="btn btn-primary">
+									    	<input type="radio" name="search-by" value="author" autocomplete="off">Autor
+									  	</label>
+									  	<label class="btn btn-primary">
+									    	<input type="radio" name="search-by" value="editorial" autocomplete="off">Editorial
+									  	</label>
+									</div>	
+					            </ul>
+					    	</span>
+					    	<input type="text" class="form-control" placeholder="¿Qué libro estás buscando?" id="consubook-btn-search" autocomplete="off">
+					    	<span class="input-group-btn">
+					   			<button type="submit" class="btn btn-default">
+					   				<span class="glyphicon glyphicon-search"></span>
+					   			</button>
+							</span>
+					    </div>
+					</div>
+				</form>
+				<div class="nav navbar-nav navbar-right">
+			 		<a tabindex="0" class="btn navbar-btn btn-info" role="button" data-popover-content="#popover_sign_up" data-toggle="popover">Registrate!</a>
+			    	<a tabindex="0" class="btn navbar-btn btn-default" role="button" data-popover-content="#popover_log_in" data-toggle="popover">Ingresar</a>
+				</div>
+			</div>
+		</nav>
+		<div class="container" >
+			<?= $this->getContent(); ?>
+		</div>
+<?php $this->assets->outputJs(); ?>
+	</body>
+</html>
