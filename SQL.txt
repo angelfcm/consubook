@@ -10,4 +10,5 @@ CREATE TABLE cbk_user_group (
 
 
 CREATE TABLE cbk_user_account (
+	Pero yo troleo mejor!!!
 );
