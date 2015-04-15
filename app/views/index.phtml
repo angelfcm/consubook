@@ -11,13 +11,15 @@
 			<div class="container">
 		    	<!-- Brand and toggle get grouped for better mobile display -->
 		    	<div class="navbar-header">
-	      			<a class="navbar-brand" href="/" ng-href="<?= $this->url->get('/'); ?>">Consubook!</a>
+	      			<a class="navbar-brand"  id="navbar-brand-consubook" href="/" ng-href="<?= $this->url->get('/'); ?>">
+	      				<img alt="Brand" src="<?= $this->url->get('/img/logo.png'); ?>" />
+	      			</a>
    			 	</div>
    			 	<form class="navbar-form navbar-left" role="search">
 					<div class="form-group">
 					    <div class="input-group">
 					    	<span class="input-group-btn dropdown" id="dropdown-search-by">
-					    		<button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+					    		<button class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
 					    			Buscar por <span class="glyphicon glyphicon-chevron-down"></span>
 					    		</button>
 					    		<ul class="dropdown-menu" style="width: 220px; text-align: center;">

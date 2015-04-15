@@ -1,3 +1,22 @@
+
+#navbar-brand-consubook {
+	height: auto;
+	padding: 0px 15px;
+}
+
+#navbar-brand-consubook img {
+    height: 50px;
+	width: 110px;
+	background-size: cover;
+}
+
+@media (max-width: 767px) {
+
+    #navbar-brand-consubook {
+    	padding: 7px 15px 1px 15px;
+    }
+}
+
 @media (min-width: 768px) {
     
     #consubook-btn-search {
@@ -11,4 +30,3 @@
     	width: 400px;
     }
 }
-
