@@ -11,14 +11,6 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "/C/xampp/htdocs/test.php",
-			"settings":
-			{
-				"buffer_size": 128,
-				"line_ending": "Windows"
-			}
-		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -59,7 +51,6 @@
 	[
 		"/C/xampp/htdocs/consubook",
 		"/C/xampp/htdocs/consubook/app",
-		"/C/xampp/htdocs/consubook/app/models",
 		"/C/xampp/htdocs/consubook/public",
 		"/C/xampp/htdocs/consubook/public/js"
 	],
@@ -102,37 +93,8 @@
 	"groups":
 	[
 		{
-			"selected": 0,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "/C/xampp/htdocs/test.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 128,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								51,
-								51
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				}
 			]
 		}
 	],
