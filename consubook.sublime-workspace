@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"bakcgroun",
+				"background-size"
+			],
+			[
 				"Phalcon",
 				"Phalcon\\Db"
 			]
@@ -11,92 +15,6 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "SQL.txt",
-			"settings":
-			{
-				"buffer_size": 925,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "app/views/user/singup.phtml",
-			"settings":
-			{
-				"buffer_size": 1995,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "app/views/index.phtml",
-			"settings":
-			{
-				"buffer_size": 2524,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"contents": "@media (min-width: 768px) {\n    \n    #consubook-btn-search {\n    	width: 230px;\n    }\n}\n\n@media (min-width: 992px) {\n    \n    #consubook-btn-search {\n    	width: 400px;\n    }\n}\n\n",
-			"file": "public/css/consubook.css",
-			"file_size": 192,
-			"file_write_time": 130735395443750269,
-			"settings":
-			{
-				"buffer_size": 178,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"contents": "\nvar ngConsubook = angular.module('consubook', []);\n\nngConsubook\n	.controller('test', ['$scope', function($scope) {\n\n\n\n}]);\n\n\n\n\n\n// Comportamiento para mostrar el dropdown de filtro de búsqueda al hacer focus en el input de búsqueda\n$(function(){\n\n	var $dropdown = $('#dropdown-search-by');\n	var $dropdown_menu = $dropdown.find('.dropdown-menu');\n	// Error inesperado cuando se utiliza dropdown('toggle') el comportamiento de los botones deja de funcioanr, no es posible seleccionar despues de esto\n/*\n 	$('#consubook-btn-search').on('focus', function(){\n\n 		\n 		if ( $dropdown_menu.css('display') == 'none' ) {\n 			$dropdown.on(\"hide.bs.dropdown\", function() { return false; });\n 			$dropdown_menu.dropdown('toggle');\n 		}\n 	}).on('blur', function(){\n 		\n 		if ( $dropdown_menu.css('display') == 'block' ) {\n 			$dropdown.off(\"hide.bs.dropdown\");\n 			$dropdown_menu.dropdown('toggle');\n 		}\n 	});\n*/\n});",
-			"file": "public/js/consubook.js",
-			"file_size": 942,
-			"file_write_time": 130735393654727942,
-			"settings":
-			{
-				"buffer_size": 904,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"contents": "<?php\n\nclass UserController extends ControllerBase\n{\n\n    public function indexAction()\n    {\n\n    }\n\n    public function singupAction()\n    {\n\n    	//	$this->view->setVar('x',21212);\n    }\n\n}\n\n",
-			"file": "app/controllers/UserController.php",
-			"file_size": 212,
-			"file_write_time": 130735343354630941,
-			"settings":
-			{
-				"buffer_size": 194,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"contents": "<?php\n\nuse Phalcon\\Mvc\\Controller;\n\nclass ControllerBase extends Controller\n{\n\n	protected function initialize()\n    {	\n		$this->assets->addCss('bootstrap/dist/css/bootstrap-cerulean.min.css');\n		$this->assets->addCss('css/consubook.css');\n		$this->assets->addCss('bootstrap/dist/css/bootstrap-select.min.css');\n	    \n\n	    $this->assets->addJs('jquery/dist/js/jquery.min.js');\n		$this->assets->addJs('bootstrap/dist/js/bootstrap.min.js');\n		$this->assets->addJs('angular/dist/js/angular.min.js');\n		$this->assets->addJs('js/consubook.js');\n		$this->assets->addJs('bootstrap/dist/js/bootstrap-select.min.js');\n	}\n\n}\n",
-			"file": "app/controllers/ControllerBase.php",
-			"file_size": 637,
-			"file_write_time": 130735343259215484,
-			"settings":
-			{
-				"buffer_size": 615,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"contents": "<?php\n\nclass IndexController extends ControllerBase\n{\n\n    public function indexAction()\n    {\n\n    	//$this->view->setVar('x', 123123);\n    }\n\n}\n\n",
-			"file": "app/controllers/IndexController.php",
-			"file_size": 160,
-			"file_write_time": 130735226494046898,
-			"settings":
-			{
-				"buffer_size": 147,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"settings":
-			{
-				"buffer_size": 0,
-				"line_ending": "Windows"
-			}
-		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -137,22 +55,39 @@
 	[
 		"/C/xampp/htdocs/consubook",
 		"/C/xampp/htdocs/consubook/app",
+		"/C/xampp/htdocs/consubook/app/config",
+		"/C/xampp/htdocs/consubook/app/controllers",
 		"/C/xampp/htdocs/consubook/app/views",
-		"/C/xampp/htdocs/consubook/public"
+		"/C/xampp/htdocs/consubook/app/views/error",
+		"/C/xampp/htdocs/consubook/app/views/index",
+		"/C/xampp/htdocs/consubook/app/views/user",
+		"/C/xampp/htdocs/consubook/public",
+		"/C/xampp/htdocs/consubook/public/css",
+		"/C/xampp/htdocs/consubook/public/img",
+		"/C/xampp/htdocs/consubook/public/js"
 	],
 	"file_history":
 	[
-		"/C/xampp/htdocs/consubook/app/controllers/ErrorController.php",
-		"/C/xampp/htdocs/consubook/app/controllers/ControllerBase.php",
-		"/C/xampp/htdocs/consubook/app/controllers/UserController.php",
-		"/C/xampp/htdocs/consubook/app/config/services.php",
 		"/C/xampp/htdocs/consubook/app/config/config.ini",
+		"/C/xampp/htdocs/consubook/public/js/consubook.js",
+		"/C/xampp/htdocs/consubook/app/views/index.phtml",
+		"/C/xampp/htdocs/consubook/public/css/consubook.css",
 		"/C/xampp/htdocs/consubook/app/config/config.php",
+		"/C/xampp/htdocs/consubook/public/angular/dist/js/angular.min.js",
+		"/C/xampp/htdocs/consubook/public/bootstrap/dist/js/bootstrap-select.min.js",
+		"/C/Users/Angel/Desktop/bt/js/bootstrap.js",
+		"/C/Users/Angel/Desktop/bt/css/bootstrap.css",
+		"/C/xampp/htdocs/consubook/SQL.txt",
+		"/C/xampp/htdocs/consubook/app/views/user/singup.phtml",
+		"/C/xampp/htdocs/consubook/app/controllers/UserController.php",
+		"/C/xampp/htdocs/consubook/app/controllers/ControllerBase.php",
+		"/C/xampp/htdocs/consubook/app/controllers/IndexController.php",
+		"/C/xampp/htdocs/consubook/app/controllers/ErrorController.php",
+		"/C/xampp/htdocs/consubook/app/config/services.php",
 		"/C/xampp/htdocs/consubook/app/config/loader.php",
 		"/C/xampp/htdocs/consubook/public/index.php",
 		"/C/xampp/htdocs/consubook/app/views/error/notFound.phtml",
 		"/D/keys4f/config.php",
-		"/C/xampp/htdocs/consubook/app/controllers/IndexController.php",
 		"/C/xampp/htdocs/consubook/app/views/index/notFound.phtml",
 		"/C/xampp/htdocs/test.php",
 		"/C/Users/Angel/Desktop/test.php",
@@ -160,7 +95,7 @@
 	],
 	"find":
 	{
-		"height": 34.0
+		"height": 23.0
 	},
 	"find_in_files":
 	{
@@ -175,6 +110,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"bootstrap-select.js.map",
 			"loader",
 			"'(.+?)'( )*=>(.)*'(.+?)',?",
 			"'(.+?)'( )*=>(.)*'(.+?)'\\n?",
@@ -205,264 +141,8 @@
 	"groups":
 	[
 		{
-			"selected": 1,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "SQL.txt",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 925,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								322,
-								322
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/SQL/SQL.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 8,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "app/views/user/singup.phtml",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1995,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1246,
-								1247
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "app/views/index.phtml",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2524,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2145,
-								2145
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 135.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "public/css/consubook.css",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 178,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								75,
-								75
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/CSS/CSS.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "public/js/consubook.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 904,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								433,
-								433
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "app/controllers/UserController.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 194,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								5,
-								5
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "app/controllers/ControllerBase.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 615,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								242,
-								242
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 7,
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "app/controllers/IndexController.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 147,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 8,
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 0,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				}
 			]
 		}
 	],
@@ -505,7 +185,7 @@
 	"project": "consubook.sublime-project",
 	"replace":
 	{
-		"height": 62.0
+		"height": 42.0
 	},
 	"save_all_on_build": true,
 	"select_file":
