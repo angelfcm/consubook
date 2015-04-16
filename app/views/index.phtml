@@ -9,12 +9,12 @@
 	<body ng-controller="test">
 		<nav class="navbar navbar-default" id="navbar-consubook">
 			<div class="container">
-		    	<div class="navbar-header">
+		    	<div class="navbar-header inline-block-middle">
 	      			<a class="navbar-brand" href="/" ng-href="<?= $this->url->get('/'); ?>">
 	      				<img alt="Brand" src="<?= $this->url->get($this->config['consubook']['http_logo']); ?>" />
 	      			</a>
    			 	</div>
-   			 	<form class="navbar-form navbar-left" role="search">
+   			 	<form class="navbar-form inline-block-middle" role="search">
 					<div class="form-group">
 					    <div class="input-group">
 					    	<span class="input-group-btn dropdown" id="dropdown-search-by">
@@ -44,7 +44,9 @@
 					    </div>
 					</div>
 				</form>
+		</div>
 			</div>
+
 		</nav>
 		<div class="well well-sm">
  			<a tabindex="0" class="btn btn-info" role="button" data-popover-content="#popover_sign_up" data-toggle="popover" href="<?= $this->url->get('user/singup'); ?>" ng-href="<?= $this->url->get('user/singup'); ?>">Registrate!</a>

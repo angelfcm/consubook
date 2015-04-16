@@ -29,3 +29,10 @@
     	width: 420px;
     }
 }
+
+.inline-block-middle {
+
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
