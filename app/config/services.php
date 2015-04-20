@@ -7,6 +7,7 @@ use Phalcon\Db\Adapter\Pdo\Mysql as DbAdapter;
 use Phalcon\Mvc\View\Engine\Volt as VoltEngine;
 use Phalcon\Mvc\Model\Metadata\Memory as MetaDataAdapter;
 use Phalcon\Session\Adapter\Files as SessionAdapter;
+use \Phalcon\Mvc\Dispatcher;
 
 /**
  * The FactoryDefault Dependency Injector automatically register the right services providing a full stack framework
@@ -85,3 +86,41 @@ $di->set('config', function () use ($config) {
     return $config;
 });
 
+
+$di->set('dispatcher', function() use ($di) {
+
+        $eventsManager = $di->getShared('eventsManager');
+
+        $eventsManager->attach('dispatch:beforeException', function($event, $dispatcher, $exception) {
+               
+                switch ($exception->getCode()) {
+
+                    case Dispatcher::EXCEPTION_HANDLER_NOT_FOUND:
+                    case Dispatcher::EXCEPTION_ACTION_NOT_FOUND:
+                        $dispatcher->forward(
+                            array(
+                                'controller' => 'error',
+                                'action' => 'notFound',
+                            )
+                        );
+                        return false;
+                        break; // for checkstyle
+                    default:
+                        $dispatcher->forward(
+                            array(
+                                'controller' => 'error',
+                                'action' => 'uncaughtException',
+                            )
+                        );
+                        return false;
+                        break; // for checkstyle
+                }
+            }
+        );
+
+        $dispatcher = new Dispatcher();
+        $dispatcher->setEventsManager($eventsManager);
+
+        return $dispatcher;
+    }, true
+);

@@ -1,14 +1,38 @@
+
+#navbar-consubook .navbar-brand {
+	height: auto;
+	/*padding: 0px 15px;*/
+}
+
+#navbar-consubook .navbar-brand img {
+    max-height: 50px;
+	background-size: cover;
+}
+
+@media (max-width: 991px) {
+
+    #navbar-consubook .navbar-brand img {
+    	max-height: 43px;
+	}
+}
+
 @media (min-width: 768px) {
     
     #consubook-btn-search {
-    	width: 300px;
+    	width: 270px;
     }
 }
 
 @media (min-width: 992px) {
     
     #consubook-btn-search {
-    	width: 400px;
+    	width: 420px;
     }
 }
 
+.inline-block-middle {
+
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}

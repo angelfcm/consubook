@@ -1,6 +1,6 @@
 <?php
 
-class UsersController extends ControllerBase
+class UserController extends ControllerBase
 {
 
     public function indexAction()
@@ -8,8 +8,9 @@ class UsersController extends ControllerBase
 
     }
 
-    public function registerAction()
+    public function singupAction()
     {
+
     	//	$this->view->setVar('x',21212);
     }
 

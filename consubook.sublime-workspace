@@ -12,7 +12,10 @@
 	"buffers":
 	[
 		{
+			"contents": "<form>\n   	<div class=\"form-group\">\n    	<label for=\"singupPhone\">Teléfono</label>\n    	<input type=\"phone\" class=\"form-control\" id=\"singupPhone\">\n  	</div>\n  	<div class=\"form-group\">\n    	<label for=\"singupEmail\">E-mail</label>\n    	<input type=\"email\" class=\"form-control\" id=\"singupEmail\" placeholder=\"E-mail\">\n  	</div>\n  	<div class=\"form-group\">\n    	<label for=\"singupPassword\">Contraseña</label>\n    	<input type=\"password\" class=\"form-control\" id=\"singupPassword\" placeholder=\"Contraseña\">\n  	</div>\n  	<div>\n     	<label for=\"singupConfirmPassword\">Confirmar contraseña</label>\n    	<input type=\"password\" class=\"form-control\" id=\"singupConfirmPassword\" placeholder=\"Password\">\n    </div>\n  	<div class=\"form-group\">\n    	<label for=\"singupName\">Nombre(s)</label>\n    	<input type=\"email\" class=\"form-control\" id=\"singupName\" placeholder=\"Enter email\">\n  	</div>\n   	<div class=\"form-group\">\n    	<label for=\"singupLastname\">Apellido</label>\n    	<input type=\"email\" class=\"form-control\" id=\"singupLastname\" placeholder=\"Enter email\">\n  	</div>\n   	<div class=\"form-group\">\n    	<label for=\"singupGender\">Sexo</label>\n    	<select class=\"form-control\" id=\"singupGender\">\n    		<option>Masculino</option>\n    		<option>Femenino</option>\n    	</select>\n  	</div>\n  	<div class=\"form-group\">\n  		<button type=\"submit\" class=\"btn btn-primary\">Crear cuenta</button>\n  	</div>\n</form>",
 			"file": "app/views/users/register.phtml",
+			"file_size": 1428,
+			"file_write_time": 130734978351516221,
 			"settings":
 			{
 				"buffer_size": 1389,
@@ -59,9 +62,9 @@
 	[
 		"/C/xampp/htdocs/consubook",
 		"/C/xampp/htdocs/consubook/app",
+		"/C/xampp/htdocs/consubook/app/controllers",
 		"/C/xampp/htdocs/consubook/app/models",
 		"/C/xampp/htdocs/consubook/app/views",
-		"/C/xampp/htdocs/consubook/app/views/users",
 		"/C/xampp/htdocs/consubook/public",
 		"/C/xampp/htdocs/consubook/public/js"
 	],
@@ -120,8 +123,8 @@
 						"selection":
 						[
 							[
-								1179,
-								1179
+								863,
+								863
 							]
 						],
 						"settings":

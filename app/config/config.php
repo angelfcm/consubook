@@ -1,5 +1,10 @@
 <?php
 
+$config = new \Phalcon\Config\Adapter\Ini('config.ini');
+
+return  $config;
+
+/*
 return new \Phalcon\Config(array(
     'database' => array(
         'adapter'     => 'Mysql',
@@ -20,3 +25,4 @@ return new \Phalcon\Config(array(
         'baseUri'        => '/consubook/',
     )
 ));
+*/

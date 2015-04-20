@@ -7,31 +7,32 @@
 <?php $this->assets->outputCss(); ?>
 	</head>
 	<body ng-controller="test">
-		<nav class="navbar navbar-default">
+		<nav class="navbar navbar-default" id="navbar-consubook">
 			<div class="container">
-		    	<!-- Brand and toggle get grouped for better mobile display -->
-		    	<div class="navbar-header">
-	      			<a class="navbar-brand" href="#">Consubook!</a>
+		    	<div class="navbar-header inline-block-middle">
+	      			<a class="navbar-brand" href="/" ng-href="<?= $this->url->get('/'); ?>">
+	      				<img alt="Brand" src="<?= $this->url->get($this->config['consubook']['http_logo']); ?>" />
+	      			</a>
    			 	</div>
-   			 	<form class="navbar-form navbar-left" role="search">
+   			 	<form class="navbar-form inline-block-middle" role="search">
 					<div class="form-group">
 					    <div class="input-group">
-					    	<span class="input-group-btn">
-					    		<button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-					    			<span class="glyphicon glyphicon-chevron-down"></span>
+					    	<span class="input-group-btn dropdown" id="dropdown-search-by">
+					    		<button class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" role="button" aria-expanded="false">
+					    			Buscar por <span class="glyphicon glyphicon-chevron-down"></span>
 					    		</button>
-					    		<ul class="dropdown-menu">
+					    		<ul class="dropdown-menu" style="width: 220px; text-align: center;">
 									<div class="btn-group" data-toggle="buttons">
 									  	<label class="btn btn-primary active">
-									   		<input type="radio" name="search-by" value="title" autocomplete="off" checked>Título
+									   		<input type="radio" name="search-by" value="title" checked>Título
 									  	</label>
 									  	<label class="btn btn-primary">
-									    	<input type="radio" name="search-by" value="author" autocomplete="off">Autor
+									    	<input type="radio" name="search-by" value="author">Autor
 									  	</label>
 									  	<label class="btn btn-primary">
-									    	<input type="radio" name="search-by" value="editorial" autocomplete="off">Editorial
+									    	<input type="radio" name="search-by" value="editorial">Editorial
 									  	</label>
-									</div>	
+									</div>
 					            </ul>
 					    	</span>
 					    	<input type="text" class="form-control" placeholder="¿Qué libro estás buscando?" id="consubook-btn-search" autocomplete="off">
@@ -43,12 +44,14 @@
 					    </div>
 					</div>
 				</form>
-				<div class="nav navbar-nav navbar-right">
-			 		<a tabindex="0" class="btn navbar-btn btn-info" role="button" data-popover-content="#popover_sign_up" data-toggle="popover">Registrate!</a>
-			    	<a tabindex="0" class="btn navbar-btn btn-default" role="button" data-popover-content="#popover_log_in" data-toggle="popover">Ingresar</a>
-				</div>
+		</div>
 			</div>
+
 		</nav>
+		<div class="well well-sm">
+ 			<a tabindex="0" class="btn btn-info" role="button" data-popover-content="#popover_sign_up" data-toggle="popover" href="<?= $this->url->get('user/singup'); ?>" ng-href="<?= $this->url->get('user/singup'); ?>">Registrate!</a>
+    		<a tabindex="0" class="btn btn-default" role="button" data-popover-content="#popover_log_in" data-toggle="popover">Ingresar</a>			
+		</div>
 		<div class="container" >
 			<?= $this->getContent(); ?>
 		</div>

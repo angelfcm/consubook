@@ -6,9 +6,27 @@ CREATE TABLE cbk_user_group (
 	id INT AUTO_INCREMENT PRIMARY KEY,
 	name VARCHAR(64) NOT NULL,
 	permission TEXT
-);
-
+)
+COLLATE='utf8_unicode_ci'
+ENGINE=InnoDB
+;
 
 CREATE TABLE cbk_user_account (
-	Pero yo troleo mejor!!!
-);
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	username VARCHAR(40) NOT NULL UNIQUE,
+	email VARCHAR(255) NOT NULL UNIQUE,
+	password VARCHAR(255) NOT NULL,
+	firstname VARCHAR(40),
+	lastname VARCHAR(40),
+	gender ENUM('male', 'female', 'unspecified') DEFAULT 'unspecified',
+	age TINYINT UNSIGNED CHECK(age BETWEEN 1 AND 150),
+	phone VARCHAR(30),
+	address VARCHAR(100),
+	user_group_id INT DEFAULT NULL,
+	FOREIGN KEY(user_group_id) REFERENCES cbk_user_group(id)
+	ON UPDATE CASCADE  #Si se actualiza un grupo de usuario, esta columna se actualizará.
+	ON DELETE SET NULL #Si se borra un grupo de usuario, esta columna será puesta como NULL
+)
+COLLATE='utf8_unicode_ci'
+Engine=InnoDB
+;
