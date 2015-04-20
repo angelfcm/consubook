@@ -12,10 +12,10 @@
 	"buffers":
 	[
 		{
-			"file": "/C/xampp/htdocs/test.php",
+			"file": "app/views/users/register.phtml",
 			"settings":
 			{
-				"buffer_size": 128,
+				"buffer_size": 1389,
 				"line_ending": "Windows"
 			}
 		}
@@ -60,6 +60,8 @@
 		"/C/xampp/htdocs/consubook",
 		"/C/xampp/htdocs/consubook/app",
 		"/C/xampp/htdocs/consubook/app/models",
+		"/C/xampp/htdocs/consubook/app/views",
+		"/C/xampp/htdocs/consubook/app/views/users",
 		"/C/xampp/htdocs/consubook/public",
 		"/C/xampp/htdocs/consubook/public/js"
 	],
@@ -107,27 +109,27 @@
 			[
 				{
 					"buffer": 0,
-					"file": "/C/xampp/htdocs/test.php",
+					"file": "app/views/users/register.phtml",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 128,
+						"buffer_size": 1389,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								51,
-								51
+								1179,
+								1179
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/PHP/PHP.tmLanguage"
+							"syntax": "Packages/HTML/HTML.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 191.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
