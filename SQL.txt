@@ -1,8 +1,8 @@
-CREATE DATABASE consubook COLLATE 'utf8_unicode_ci';
+﻿CREATE DATABASE consubook COLLATE 'utf8_unicode_ci';
 
 USE consubook;
 
-CREATE TABLE cbk_user_group (
+CREATE TABLE cbk_user_role (
 	id INT AUTO_INCREMENT PRIMARY KEY,
 	name VARCHAR(64) NOT NULL,
 	permission TEXT
@@ -26,6 +26,16 @@ CREATE TABLE cbk_user_account (
 	FOREIGN KEY(user_group_id) REFERENCES cbk_user_group(id)
 	ON UPDATE CASCADE  #Si se actualiza un grupo de usuario, esta columna se actualizará.
 	ON DELETE SET NULL #Si se borra un grupo de usuario, esta columna será puesta como NULL
+)
+COLLATE='utf8_unicode_ci'
+Engine=InnoDB
+;
+
+
+CREATE TABLE cbk_user_resources(
+	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	controller VARCHAR(45) NOT NULL,
+	action VARCHAR(45) NOT NULL
 )
 COLLATE='utf8_unicode_ci'
 Engine=InnoDB

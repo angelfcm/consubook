@@ -17,6 +17,10 @@ class ControllerBase extends Controller
 		$this->assets->addJs('angular/dist/js/angular.min.js');
 		$this->assets->addJs('js/consubook.js');
 		$this->assets->addJs('bootstrap/dist/js/bootstrap-select.min.js');
+
+
+
+
 	}
 
 }

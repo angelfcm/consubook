@@ -11,7 +11,11 @@ class UserController extends ControllerBase
     public function singupAction()
     {
 
-    	//	$this->view->setVar('x',21212);
+    	if ( !$this->acl->isAllowed($this->user->getRole(), 'User', 'singup') ) {
+    		$this->flash->error("You don't have access to this module");
+
+    		$this->response->redirect('index/index');
+    	}
     }
 
 }

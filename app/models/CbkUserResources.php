@@ -1,6 +1,6 @@
 <?php
 
-class CbkUserGroup extends \Phalcon\Mvc\Model
+class CbkUserResources extends \Phalcon\Mvc\Model
 {
 
     /**
@@ -13,13 +13,13 @@ class CbkUserGroup extends \Phalcon\Mvc\Model
      *
      * @var string
      */
-    public $name;
+    public $controller;
 
     /**
      *
      * @var string
      */
-    public $permission;
+    public $action;
 
     /**
      * Independent Column Mapping.
@@ -28,8 +28,8 @@ class CbkUserGroup extends \Phalcon\Mvc\Model
     {
         return array(
             'id' => 'id', 
-            'name' => 'name', 
-            'permission' => 'permission'
+            'controller' => 'controller', 
+            'action' => 'action'
         );
     }
 
