@@ -5,44 +5,65 @@ namespace Lib;
 class User {
 
 	protected $username = '',
-			  $password = '',
-			  $authenticated = false,
+			  $is_authenticated = false,
 			  $role = '',
-			  $data = array();
+			  $session = array();
 
 	const ROLE_GUEST = 'Guest';
 	const ROLE_ACCOUNT = 'Account';
 	const ROLE_DEFAULT = 'Guest';
 
-	public function __construct() {
+	public function __construct($session) 
+	{	
+		$this->session = $session;
 
+		$this->authenticate();
+	}
+
+	public function authenticate( $username = "" , $email = "", $password = "" )
+	{
+		if ( !empty($this->session->get('user')) ) {
+
+			$session_user = $this->session->get('user');
+
+			$this->setRole($session_user['role']);
+			$this->username = $session_user['username'];
+			$this->is_authenticated = $session_user['is_authenticated'];
+
+			return true;
+		}
+		else if ( ($username != "" || $email != "") && $password != "" ) {
+
+			$account = \CbkUserAccount::findFirst(
+				array(
+					'username = ?0 OR email = ?0',
+					'bind' => array($username, $email)
+				)
+			);
+
+			if ( $account ) {
+
+				if ( $this->security->checkHash($password, $account->password) ) {
+
+					$this->setRole($account->CbkUserRole->name);
+					$this->username = $account->username;
+					$this->is_authenticated = true;
+				}
+				return true;
+			}
+		} 
 		$this->setRole(self::ROLE_DEFAULT);
+		return false;
 	}
 
-	public function Authenticate()
+	public function isAuthenticated()
 	{
-
-	}
-
-	public function isLogged()
-	{
-		return $authenticated;
+		return $is_authenticated;
 	}
 
 	public function getUsername()
 	{
 
-	}
-
-	public function getPassword()
-	{
-
-	}
-
-	protected function setCredential($username, $password)
-	{
-		$this->username = $username;
-		$this->password = $password;
 	}
 
 	private function setRole($role)

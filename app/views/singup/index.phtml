@@ -1,4 +1,4 @@
-<form action="<?= $this->url->get('user/singup'); ?>" validate>
+<?= \Phalcon\Tag::Form('singup'); ?>
     <div class="form-group">
         <label for="singupUsername" classs="control-label">Nombre de usuario</label>
         <input type="text" class="form-control" id="singupUsername" placeholder="Nombre de usuario" />
@@ -33,7 +33,7 @@
   	</div>
    	<div class="form-group">
         <label for="singupGender">Sexo</label>
-    	  <select class="form-control selectpicker" id="singupGender">
+    	  <select class="selectpicker" id="singupGender">
     		    <option>Masculino</option>
     		    <option>Femenino</option>
     	  </select>

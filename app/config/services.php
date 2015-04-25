@@ -150,11 +150,16 @@ $di->set('acl', function() {
         return $acl;
 });
 
-$di->set('user', function(){
+$di->set('user', function() use ($di) {
 
-    $user = new \Lib\User();
+    $user = new \Lib\User($di->get('session'));
 
     return $user;
 });
-$di->get('user')->getRole();
-//file_put_contents("x.txt", "hmm".$di->get('user')->getRole());
+
+
+$di->set('validation', function() {
+
+    return new \Phalcon\Validation();
+
+});

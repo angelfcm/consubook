@@ -22,6 +22,14 @@ class CbkUserRole extends \Phalcon\Mvc\Model
     public $permission;
 
     /**
+     * Initialize method for model.
+     */
+    public function initialize()
+    {
+        $this->hasMany('id', 'CbkUserAccount', 'user_role_id');
+    }
+
+    /**
      * Independent Column Mapping.
      */
     public function columnMap()
