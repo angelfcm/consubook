@@ -8,11 +8,5 @@ class UserController extends ControllerBase
 
     }
 
-    public function singupAction()
-    {
-
-    	//	$this->view->setVar('x',21212);
-    }
-
 }
 

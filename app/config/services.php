@@ -124,3 +124,42 @@ $di->set('dispatcher', function() use ($di) {
         return $dispatcher;
     }, true
 );
+
+$di->set('acl', function() {
+
+        $acl = new \Phalcon\Acl\Adapter\Memory();
+        $acl->setDefaultAction(Phalcon\Acl::DENY);
+
+        $resources = CbkUserResources::find();
+        foreach ( $resources as $resource ) {
+            $acl->addResource($resource->controller, $resource->action);
+        }
+
+        $roles = CbkUserRole::find();
+        foreach ( $roles as $role ) {
+            $acl->addRole($role->name);
+
+            $permissions = unserialize($role->permission);
+
+            foreach( $permissions as $perm ) {
+                if ( $perm['allow'] )
+                    $acl->allow($role->name, $perm['controller'], $perm['action']);
+            }
+        }
+
+        return $acl;
+});
+
+$di->set('user', function() use ($di) {
+
+    $user = new \Lib\User($di->get('session'));
+
+    return $user;
+});
+
+
+$di->set('validation', function() {
+
+    return new \Phalcon\Validation();
+
+});

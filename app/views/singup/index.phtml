@@ -1,7 +1,12 @@
-<form validate>
+<?php if ( isset($error['validation']) ) { foreach($error['validation'] as $error):?>
+<ul class="danger">
+  <li class="text-danger"><?= $error; ?></li>
+</ul>
+<?php endforeach; } ?>
+<?= \Phalcon\Tag::Form('singup'); ?>
     <div class="form-group">
-        <label for="singupUsername" classs="control-label">Nombre de usuario</label>
-        <input type="email" class="form-control" id="singupUsername" placeholder="Nombre de usuario" />
+        <label for="singupUsername" class="control-label">Nombre de usuario</label>
+        <input type="text" name="username" class="form-control" id="singupUsername" placeholder="Nombre de usuario" />
     </div>
   	<div class="form-group">
     	  <label for="singupEmail">E-mail</label>
@@ -15,7 +20,7 @@
             </div>
             <div class="col-sm-6"> 
          	      <label for="singupConfirmPassword">Confirmar contraseña</label>
-        	      <input type="password" class="form-control" id="singupConfirmPassword" placeholder="Escribela de nuevo" />
+        	      <input type="password" class="form-control" id="singupConfirmPassword" placeholder="" />
             </div>
         </div>
     </div>
@@ -32,8 +37,8 @@
         </div>
   	</div>
    	<div class="form-group">
-        <label for="singupGender">Sexo</label>;
-    	  <select class="form-control selectpicker" id="singupGender">
+        <label for="singupGender">Sexo</label>
+    	  <select class="selectpicker" id="singupGender">
     		    <option>Masculino</option>
     		    <option>Femenino</option>
     	  </select>
