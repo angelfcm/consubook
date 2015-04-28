@@ -51,9 +51,18 @@ class User {
 				}
 				return true;
 			}
-		} 
-		$this->setRole(self::ROLE_DEFAULT);
+		}
+		 
+		$this->unauthenticate();
+
 		return false;
+	}
+
+	public function unauthenticate()
+	{
+		$this->setRole(self::ROLE_DEFAULT);
+		$this->username = "";
+		$this->is_authenticated = false;	
 	}
 
 	public function isAuthenticated()

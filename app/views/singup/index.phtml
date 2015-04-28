@@ -1,7 +1,12 @@
+<?php if ( isset($error['validation']) ) { foreach($error['validation'] as $error):?>
+<ul class="danger">
+  <li class="text-danger"><?= $error; ?></li>
+</ul>
+<?php endforeach; } ?>
 <?= \Phalcon\Tag::Form('singup'); ?>
     <div class="form-group">
-        <label for="singupUsername" classs="control-label">Nombre de usuario</label>
-        <input type="text" class="form-control" id="singupUsername" placeholder="Nombre de usuario" />
+        <label for="singupUsername" class="control-label">Nombre de usuario</label>
+        <input type="text" name="username" class="form-control" id="singupUsername" placeholder="Nombre de usuario" />
     </div>
   	<div class="form-group">
     	  <label for="singupEmail">E-mail</label>
