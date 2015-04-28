@@ -21,6 +21,14 @@
 				"buffer_size": 1389,
 				"line_ending": "Windows"
 			}
+		},
+		{
+			"file": "app/controllers/UserController.php",
+			"settings":
+			{
+				"buffer_size": 194,
+				"line_ending": "Windows"
+			}
 		}
 	],
 	"build_system": "",
@@ -60,7 +68,6 @@
 	},
 	"expanded_folders":
 	[
-		"/C/xampp/htdocs/consubook",
 		"/C/xampp/htdocs/consubook/app",
 		"/C/xampp/htdocs/consubook/app/controllers",
 		"/C/xampp/htdocs/consubook/app/models",
@@ -107,7 +114,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -133,6 +140,34 @@
 						},
 						"translation.x": 0.0,
 						"translation.y": 191.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "app/controllers/UserController.php",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 194,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								144,
+								184
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
