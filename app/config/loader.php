@@ -13,6 +13,7 @@ $loader->registerDirs(
 	)
 )->registerNamespaces(
 	array(
-		'Lib'=>$config->application->libDir
+		'Lib' => $config->application->libDir,
+		'Forms' => $config->application->formsDir,
 	)
 )->register();

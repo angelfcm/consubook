@@ -36,3 +36,65 @@
     vertical-align: middle;
     float: none;
 }
+
+.popover-validation {
+
+}
+
+.popover-validation ul {
+    list-style-type: none!important;
+    -webkit-padding-start: 0;
+    margin-bottom: 0!important;
+}
+
+.popover-validation .glyphicon-ok {
+    color: green;
+}
+
+.popover-validation .glyphicon-remove {
+    color: red;
+}
+
+input.ng-invalid.ng-dirty {
+    border-color: #b00!important;
+    color: #b00!important;
+}
+
+.success {
+    color: #73a839;
+}
+
+.danger {
+    color: #c71c22;
+}
+
+@media (max-width:767px) { 
+
+    .fix-margin-xs {
+        margin-bottom: 15px;
+    }
+
+}
+
+.selectpicker {
+    border: 1px solid #cccccc;
+}
+
+/* Alinea correctamente el icono a la derecha del control que esta en esta estructura de clases (que es para mostrar controles en forma horizontal alineada) */
+.form-group.row>div.has-feedback .glyphicon-ok, .form-group.row>div.has-feedback .glyphicon-remove {
+    right: 15px;
+}
+
+.singup-captcha .glyphicon-refresh {
+    cursor: pointer;
+    font-size: 20px;
+    color: #54b4eb;
+}
+
+.singup-captcha .glyphicon-refresh:hover {
+    color: #1d9ce5;
+}
+
+.singup-captcha .active {
+    font-size: 18px;
+}

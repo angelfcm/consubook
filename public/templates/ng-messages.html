@@ -1,0 +1,16 @@
+<!--<ul class="list-group">
+	<li class="list-group-item list-group-item-danger" ng-message="required"><span class="glyphicon glyphicon-triangle-right" ></span> Campo requerido</li>
+	<li class="list-group-item list-group-item-danger" ng-message="minlength"><span class="glyphicon glyphicon-triangle-right" ></span> De 4 a 24 carácteres de longitud</li>
+	<li class="list-group-item list-group-item-danger" ng-message="pattern"><span class="glyphicon glyphicon-triangle-right" ></span> {{patternMsg||'Carácteres inválidos'}}</li>
+	<li class="list-group-item list-group-item-danger" ng-message="exists"><span class="glyphicon glyphicon-triangle-right" ></span> Ya está en uso</li>
+	<li class="list-group-item list-group-item-danger" ng-message="email"><span class="glyphicon glyphicon-triangle-right" ></span> Email inválido</li>
+</ul>-->
+<ul>
+	<li  ng-message="required">{{messages.required||'Campo requerido'}}</li>
+	<li  ng-message="minlength">{{messages.minlength || 'Longitud de carácteres inválida'}}</li>
+	<li  ng-message="maxlength">{{messages.maxlength || 'Longitud de carácteres inválida'}}</li>
+	<li  ng-message="pattern">{{messages.pattern||'Carácteres inválidos'}}</li>
+	<li  ng-message="exists">{{messages.exists||'Ya está en uso'}}</li>
+	<li  ng-message="email">{{messages.email||'Email inválido'}}</li>
+	<li  ng-message="compare">{{messages.compare||'No coincide con el campo correspondiente'}}</li>
+</ul>

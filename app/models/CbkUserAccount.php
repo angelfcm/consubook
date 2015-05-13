@@ -1,6 +1,6 @@
 <?php
 
-use Phalcon\Mvc\Model\Validator\Email as Email;
+use Phalcon\Mvc\Model\Validator;
 
 class CbkUserAccount extends \Phalcon\Mvc\Model
 {
@@ -71,20 +71,15 @@ class CbkUserAccount extends \Phalcon\Mvc\Model
      */
     public $user_role_id;
 
+    public $created_at;
+
+    public $modified_at;
+
     /**
      * Validations and business logic
      */
     public function validation()
     {
-
-        $this->validate(
-            new Email(
-                array(
-                    'field'    => 'email',
-                    'required' => true,
-                )
-            )
-        );
         if ($this->validationHasFailed() == true) {
             return false;
         }
@@ -96,6 +91,7 @@ class CbkUserAccount extends \Phalcon\Mvc\Model
     public function initialize()
     {
         $this->belongsTo('user_role_id', 'CbkUserRole', 'id');
+        $this->hasOne('id', 'CbkUserConfirmation', 'account_id');
     }
 
     /**
@@ -114,7 +110,9 @@ class CbkUserAccount extends \Phalcon\Mvc\Model
             'age' => 'age', 
             'phone' => 'phone', 
             'address' => 'address', 
-            'user_role_id' => 'user_role_id'
+            'user_role_id' => 'user_role_id',
+            'created_at' => 'created_at',
+            'modified_at' => 'modified_at'
         );
     }
 

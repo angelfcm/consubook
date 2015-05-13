@@ -5,8 +5,8 @@ class IndexController extends ControllerBase
 
     public function indexAction()
     {
-
-    	//$this->view->setVar('x', 123123);
+    	//$this->user->unauthenticate();
+    	//$this->user->authenticate('angelfcm', '', 'caterpillar1');
     }
 
 }

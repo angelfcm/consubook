@@ -17,9 +17,10 @@ class ErrorController extends ControllerBase
         $this->response->send();
     }
 
-    public function uncaughtException()
+    public function uncaughtExceptionAction()
     {
-
+        
+        $this->view->setVar('exception', $this->dispatcher->getParam('exception'));
     }
 
 }

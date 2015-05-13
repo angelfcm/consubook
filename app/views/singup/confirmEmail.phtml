@@ -1,0 +1,20 @@
+<?php if ( $confirmed ): ?>
+<div class="jumbotron alert-success">
+	<h1>Felicidades tu cuenta ha sido confirmada!</h1>
+	<p>
+	<a class="btn btn-primary btn-lg" role="button" href="<?php echo $this->url->get('/'); ?>">Ir a la página inicial</a>
+	</p>
+</div>
+<?php endif; ?>
+
+<?php if ( !$confirmed ): ?>
+<div class="jumbotron alert-warning">
+	<h1>Lo sentimos, tu cuenta ya ha expirado!</h1>
+	<p>
+	Sin embargo, puedes crear otra en este mismo momento!
+	</p>
+	<p>
+	<a class="btn btn-primary btn-lg" role="button" href="<?php echo $this->url->get('/'); ?>">Registrarse!</a> <a class="btn btn-primary btn-lg" role="button" href="<?php echo $this->url->get('/'); ?>">Ir a la página inicial</a>
+	</p>
+</div>
+<?php endif; ?>

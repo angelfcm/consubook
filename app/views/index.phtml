@@ -5,8 +5,9 @@
 		<title>Consubook</title>
 
 <?php $this->assets->outputCss(); ?>
+<?php $this->assets->outputJs(); ?>
 	</head>
-	<body ng-controller="test">
+	<body>
 		<nav class="navbar navbar-default" id="navbar-consubook">
 			<div class="container">
 		    	<div class="navbar-header inline-block-middle">
@@ -48,13 +49,15 @@
 			</div>
 
 		</nav>
+<?php if( $this->user->getRole() == \lib\User::ROLE_GUEST && $this->dispatcher->getControllerName() != 'singup'  ): ?>
 		<div class="well well-sm">
- 			<a tabindex="0" class="btn btn-info" role="button" data-popover-content="#popover_sign_up" data-toggle="popover" href="<?= $this->url->get('singup'); ?>" ng-href="<?= $this->url->get('singup'); ?>">Registrate!</a>
-    		<a tabindex="0" class="btn btn-default" role="button" data-popover-content="#popover_log_in" data-toggle="popover">Ingresar</a>			
+ 			<a tabindex="0" class="btn btn-info" role="button" href="<?= $this->url->get('singup'); ?>" ng-href="<?= $this->url->get('singup'); ?>">Registrate!</a>
+    		<a tabindex="0" class="btn btn-default" role="button">Ingresar</a>			
 		</div>
-		<div class="container" >
+<?php endif; ?>
+		<div class="container" ng-view>
 			<?= $this->getContent(); ?>
 		</div>
-<?php $this->assets->outputJs(); ?>
+
 	</body>
 </html>

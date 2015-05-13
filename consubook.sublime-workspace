@@ -4,6 +4,22 @@
 		"selected_items":
 		[
 			[
+				"CbkUser",
+				"CbkUserConfirmation"
+			],
+			[
+				"list-st",
+				"list-style-type"
+			],
+			[
+				"JSON_",
+				"json_encode"
+			],
+			[
+				"get_clas",
+				"get_class_methods"
+			],
+			[
 				"bakcgroun",
 				"background-size"
 			],
@@ -16,18 +32,10 @@
 	"buffers":
 	[
 		{
-			"file": "app/views/index.phtml",
+			"file": "app/controllers/IndexController.php",
 			"settings":
 			{
-				"buffer_size": 2568,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "app/views/singup/index.phtml",
-			"settings":
-			{
-				"buffer_size": 2179,
+				"buffer_size": 209,
 				"line_ending": "Windows"
 			}
 		},
@@ -35,23 +43,15 @@
 			"file": "app/controllers/SingupController.php",
 			"settings":
 			{
-				"buffer_size": 1156,
+				"buffer_size": 10431,
 				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "app/controllers/UserController.php",
-			"settings":
-			{
-				"buffer_size": 105,
-				"line_ending": "Windows"
 			}
 		},
 		{
 			"file": "app/config/services.php",
 			"settings":
 			{
-				"buffer_size": 4417,
+				"buffer_size": 4676,
 				"line_ending": "Windows"
 			}
 		},
@@ -59,23 +59,23 @@
 			"file": "app/lib/User.php",
 			"settings":
 			{
-				"buffer_size": 1706,
+				"buffer_size": 2149,
 				"line_ending": "Windows"
 			}
 		},
 		{
-<<<<<<< HEAD
-			"file": "app/controllers/UserController.php",
+			"file": "app/models/CbkUserConfirmation.php",
 			"settings":
 			{
-				"buffer_size": 194,
-				"line_ending": "Windows"
+				"buffer_size": 1243,
+				"line_ending": "Unix"
 			}
-=======
+		},
+		{
 			"file": "app/models/CbkUserAccount.php",
 			"settings":
 			{
-				"buffer_size": 1885,
+				"buffer_size": 1875,
 				"line_ending": "Windows"
 			}
 		},
@@ -88,13 +88,37 @@
 			}
 		},
 		{
-			"file": "/C/Users/Angel/Desktop/test/app/config/config.php",
+			"file": "app/views/singup/confirmEmail.phtml",
 			"settings":
 			{
-				"buffer_size": 725,
-				"line_ending": "Unix"
+				"buffer_size": 714,
+				"line_ending": "Windows"
 			}
->>>>>>> 66ba2c592a0f5f78f31e75fdcf504826c55bb17c
+		},
+		{
+			"file": "app/views/singup/index.phtml",
+			"settings":
+			{
+				"buffer_size": 10276,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/lib/Mail.php",
+			"settings":
+			{
+				"buffer_size": 1763,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/views/email-templates/account-confirmation.phtml",
+			"settings":
+			{
+				"buffer_size": 1802,
+				"line_ending": "Windows",
+				"name": "<tbody>"
+			}
 		}
 	],
 	"build_system": "",
@@ -104,16 +128,20 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 334.0,
-		"last_filter": "oack",
+		"height": 104.0,
+		"last_filter": "Package Control: remove",
 		"selected_items":
 		[
+			[
+				"Package Control: remove",
+				"Package Control: Remove Package"
+			],
 			[
 				"oack",
 				"Package Control: Install Package"
 			]
 		],
-		"width": 400.0
+		"width": 512.0
 	},
 	"console":
 	{
@@ -134,56 +162,86 @@
 	},
 	"expanded_folders":
 	[
+		"/C/xampp/htdocs/consubook",
 		"/C/xampp/htdocs/consubook/app",
 		"/C/xampp/htdocs/consubook/app/config",
 		"/C/xampp/htdocs/consubook/app/controllers",
+		"/C/xampp/htdocs/consubook/app/forms",
 		"/C/xampp/htdocs/consubook/app/lib",
 		"/C/xampp/htdocs/consubook/app/models",
 		"/C/xampp/htdocs/consubook/app/views",
-		"/C/xampp/htdocs/consubook/app/views/error",
-		"/C/xampp/htdocs/consubook/app/views/index",
+		"/C/xampp/htdocs/consubook/app/views/email-templates",
+		"/C/xampp/htdocs/consubook/app/views/layouts",
 		"/C/xampp/htdocs/consubook/app/views/singup",
 		"/C/xampp/htdocs/consubook/public",
 		"/C/xampp/htdocs/consubook/public/js"
 	],
 	"file_history":
 	[
+		"/C/xampp/htdocs/consubook/app/config/routers.php",
+		"/C/xampp/htdocs/consubook/app/models/CbkUserAccount.php",
+		"/C/xampp/htdocs/consubook/app/views/singup/confirmEmail.phtml",
+		"/C/xampp/htdocs/consubook/app/views/singup/success.phtml",
+		"/C/xampp/htdocs/consubook/app/config/config.ini",
+		"/C/xampp/htdocs/consubook/app/config/services.php",
+		"/C/xampp/htdocs/consubook/app/views/layouts/singup.phtml",
+		"/C/Windows/System32/drivers/etc/hosts",
+		"/C/Users/Angel/Desktop/hosts",
+		"/D/keys4f/catalog/model/checkout/order.php",
+		"/D/keys4f/catalog/model/catalog/product.php",
+		"/C/xampp/htdocs/consubook/SQL.txt",
+		"/D/keys4f/catalog/model/account/order.php",
+		"/D/keys4f/catalog/controller/account/order.php",
+		"/D/keys4f/catalog/view/theme/default/template/mail/order_processed.tpl",
+		"/C/xampp/htdocs/consubook/app/views/singup/index.phtml",
+		"/C/xampp/htdocs/consubook/app/models/CbkUserConfirmation.php",
+		"/C/xampp/htdocs/consubook/public/index.php",
+		"/C/xampp/htdocs/consubook/app/lib/User.php",
+		"/C/xampp/htdocs/consubook/app/config/config.php",
+		"/C/xampp/htdocs/consubook/app/views/index.phtml",
+		"/C/xampp/htdocs/consubook/public/css/consubook.css",
+		"/C/xampp/htdocs/consubook/public/js/consubook.js",
+		"/C/xampp/htdocs/consubook/app/models/CbkUserRole.php",
+		"/C/xampp/htdocs/consubook/app/controllers/IndexController.php",
+		"/C/xampp/htdocs/consubook/app/controllers/SingupController.php",
+		"/C/xampp/htdocs/consubook/app/forms/SingupForm.php",
+		"/C/xampp/htdocs/consubook/public/templates/default-form-input.html",
+		"/C/xampp/htdocs/consubook/public/templates/ng-messages.html",
+		"/C/xampp/htdocs/consubook/app/config/loader.php",
+		"/C/xampp/htdocs/consubook/app/lib/securimage/securimage.php",
+		"/C/xampp/htdocs/consubook/app/lib/securimage/database/.htaccess",
+		"/C/Users/Angel/Desktop/securimage/securimage_play.php",
+		"/D/keys4f/admin/config.php",
+		"/D/keys4f/config.php",
+		"/C/xampp/htdocs/consubook/app/controllers/ControllerBase.php",
+		"/C/xampp/htdocs/consubook/app/controllers/ErrorController.php",
+		"/C/xampp/htdocs/consubook/public/angular/dist/js/angular-messages.min.js",
+		"/C/xampp/htdocs/consubook/public/angular/dist/js/angular.min.js",
+		"/C/xampp/htdocs/consubook/app/views/error/uncaughtException.phtml",
+		"/D/keys4f/admin/view/template/common/home.tpl",
+		"/D/keys4f/admin/index.php",
+		"/D/keys4f/admin/controller/common/home.php",
+		"/C/Users/Angel/Desktop/test/app/config/config.php",
+		"/C/xampp/htdocs/consubook/app/controllers/UserController.php",
+		"/C/xampp/htdocs/consubook/public/errr.txt",
 		"/D/keys4f/admin/view/template/catalog/product_form.tpl",
 		"/D/keys4f/admin/controller/catalog/product.php",
-		"/C/xampp/htdocs/consubook/app/views/singup/success.phtml",
 		"/C/xampp/htdocs/test/app/models/CbkUserRole.php",
 		"/C/xampp/htdocs/test/app/models/CbkUserResources.php",
 		"/C/Users/Angel/Desktop/test/app/models/CbkUserAccount.php",
-		"/C/Users/Angel/Desktop/test/app/config/config.php",
-		"/C/xampp/htdocs/consubook/public/css/consubook.css",
 		"/C/xampp/htdocs/consubook/.phalcon",
-		"/C/xampp/htdocs/consubook/app/config/services.php",
-		"/C/xampp/htdocs/consubook/app/controllers/ControllerBase.php",
-		"/C/xampp/htdocs/consubook/app/config/config.ini",
-		"/C/xampp/htdocs/consubook/app/config/loader.php",
 		"/F/division.ASM",
 		"/C/xampp/htdocs/consubook/public/acl.txt",
 		"/C/xampp/htdocs/consubook/app/models/CbkUserResources.php",
-		"/C/xampp/htdocs/consubook/app/models/CbkUserRole.php",
 		"/C/xampp/htdocs/consubook/app/models/CbkUserRoles.php",
 		"/C/xampp/htdocs/consubook/app/controllers/TestController.php",
 		"/C/xampp/htdocs/consubook/app/security/acl.data",
 		"/C/xampp/htdocs/consubook/public/acl.data",
-		"/C/xampp/htdocs/consubook/public/js/consubook.js",
-		"/C/xampp/htdocs/consubook/app/views/index.phtml",
-		"/C/xampp/htdocs/consubook/app/config/config.php",
-		"/C/xampp/htdocs/consubook/public/angular/dist/js/angular.min.js",
 		"/C/xampp/htdocs/consubook/public/bootstrap/dist/js/bootstrap-select.min.js",
 		"/C/Users/Angel/Desktop/bt/js/bootstrap.js",
 		"/C/Users/Angel/Desktop/bt/css/bootstrap.css",
-		"/C/xampp/htdocs/consubook/SQL.txt",
 		"/C/xampp/htdocs/consubook/app/views/user/singup.phtml",
-		"/C/xampp/htdocs/consubook/app/controllers/UserController.php",
-		"/C/xampp/htdocs/consubook/app/controllers/IndexController.php",
-		"/C/xampp/htdocs/consubook/app/controllers/ErrorController.php",
-		"/C/xampp/htdocs/consubook/public/index.php",
 		"/C/xampp/htdocs/consubook/app/views/error/notFound.phtml",
-		"/D/keys4f/config.php",
 		"/C/xampp/htdocs/consubook/app/views/index/notFound.phtml",
 		"/C/xampp/htdocs/test.php",
 		"/C/Users/Angel/Desktop/test.php",
@@ -206,6 +264,25 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"created",
+			"validation->add",
+			"namespace",
+			"M_E",
+			" SI_CAPTCHA_WORDS",
+			"x",
+			"scope",
+			"element.model",
+			"element.model[element.name]",
+			"scope",
+			"password",
+			">-->\n",
+			"class=\".*?\"",
+			"class=\".*\"",
+			"class=\"",
+			"<(/?)li(>?)",
+			"viewValue",
+			"console.log",
+			">(.*)<strong>",
 			"product_description[",
 			"error",
 			"public",
@@ -223,9 +300,18 @@
 		"highlight": true,
 		"in_selection": false,
 		"preserve_case": false,
-		"regex": true,
+		"regex": false,
 		"replace_history":
 		[
+			"validate",
+			"model",
+			"x",
+			"scope",
+			"element.model",
+			"",
+			"<$1div$2",
+			"dirty",
+			"><strong>$1</strong>",
 			"public function ",
 			"$1='$4'",
 			"$1='$4'\\n",
@@ -241,143 +327,24 @@
 	"groups":
 	[
 		{
-<<<<<<< HEAD
-			"selected": 1,
-=======
-			"selected": 2,
->>>>>>> 66ba2c592a0f5f78f31e75fdcf504826c55bb17c
+			"selected": 10,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "app/views/index.phtml",
+					"file": "app/controllers/IndexController.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2568,
+						"buffer_size": 209,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2273,
-								2273
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 135.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 8,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "app/views/singup/index.phtml",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2179,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								446,
-								446
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "app/controllers/SingupController.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1156,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								886,
-								886
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "app/controllers/UserController.php",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 194,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								144,
-								184
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "app/controllers/UserController.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 105,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								100,
-								100
+								102,
+								102
 							]
 						],
 						"settings":
@@ -392,20 +359,20 @@
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "app/config/services.php",
+					"buffer": 1,
+					"file": "app/controllers/SingupController.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4417,
+						"buffer_size": 10431,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4374,
-								4374
+								1620,
+								1620
 							]
 						],
 						"settings":
@@ -413,57 +380,88 @@
 							"syntax": "Packages/PHP/PHP.tmLanguage",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 396.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "app/config/services.php",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 4676,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								894,
+								843
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 198.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "app/lib/User.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2149,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1221,
+								1221
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 7,
 					"type": "text"
 				},
 				{
-					"buffer": 5,
-					"file": "app/lib/User.php",
+					"buffer": 4,
+					"file": "app/models/CbkUserConfirmation.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1706,
+						"buffer_size": 1243,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1159,
-								1159
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 486.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "app/models/CbkUserAccount.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1885,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1336,
-								1336
+								979,
+								979
 							]
 						],
 						"settings":
@@ -473,14 +471,44 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1242.0,
+						"translation.y": 432.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 8,
 					"type": "text"
 				},
 				{
-					"buffer": 7,
+					"buffer": 5,
+					"file": "app/models/CbkUserAccount.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1875,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1237,
+								1237
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1134.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 10,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
 					"file": "app/models/CbkUserRole.php",
 					"semi_transient": false,
 					"settings":
@@ -492,8 +520,8 @@
 						"selection":
 						[
 							[
-								396,
-								396
+								0,
+								0
 							]
 						],
 						"settings":
@@ -506,37 +534,125 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 9,
 					"type": "text"
 				},
 				{
-					"buffer": 8,
-					"file": "/C/Users/Angel/Desktop/test/app/config/config.php",
+					"buffer": 7,
+					"file": "app/views/singup/confirmEmail.phtml",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 725,
+						"buffer_size": 714,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								241,
-								241
+								714,
+								714
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"tab_size": 4,
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "app/views/singup/index.phtml",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 10276,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								40,
+								35
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "app/lib/Mail.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1763,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1678,
+								1678
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 216.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "app/views/email-templates/account-confirmation.phtml",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1802,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								171,
+								171
+							]
+						],
+						"settings":
+						{
+							"auto_name": "<tbody>",
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
 					"type": "text"
 				}
 			]
@@ -581,7 +697,7 @@
 	"project": "consubook.sublime-project",
 	"replace":
 	{
-		"height": 48.0
+		"height": 62.0
 	},
 	"save_all_on_build": true,
 	"select_file":

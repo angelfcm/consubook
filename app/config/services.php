@@ -110,6 +110,7 @@ $di->set('dispatcher', function() use ($di) {
                             array(
                                 'controller' => 'error',
                                 'action' => 'uncaughtException',
+                                'params' => array('exception' => $exception)
                             )
                         );
                         return false;
@@ -152,7 +153,7 @@ $di->set('acl', function() {
 
 $di->set('user', function() use ($di) {
 
-    $user = new \Lib\User($di->get('session'));
+    $user = new \Lib\User($di->getShared('session'));
 
     return $user;
 });
@@ -162,4 +163,15 @@ $di->set('validation', function() {
 
     return new \Phalcon\Validation();
 
+});
+
+
+$di->set('mail', function(){
+    return new \Lib\Mail();
+});
+
+// Para personalizar urls :D
+
+$di->set('router', function() {
+    return require __DIR__ . '/routers.php';
 });

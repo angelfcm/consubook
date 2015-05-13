@@ -1,53 +1,90 @@
-<?php if ( isset($error['validation']) ) { foreach($error['validation'] as $error):?>
-<ul class="danger">
-  <li class="text-danger"><?= $error; ?></li>
-</ul>
-<?php endforeach; } ?>
-<?= \Phalcon\Tag::Form('singup'); ?>
-    <div class="form-group">
-        <label for="singupUsername" class="control-label">Nombre de usuario</label>
-        <input type="text" name="username" class="form-control" id="singupUsername" placeholder="Nombre de usuario" />
-    </div>
-  	<div class="form-group">
-    	  <label for="singupEmail">E-mail</label>
-    	  <input type="email" class="form-control" id="singupEmail" placeholder="E-mail" />
-  	</div>
-  	<div class="form-group">
-        <div class="row">
-            <div class="col-sm-6">  
-    	          <label for="singupPassword">Contraseña</label>
-    	          <input type="password" class="form-control" id="singupPassword" placeholder="Contraseña" />
-            </div>
-            <div class="col-sm-6"> 
-         	      <label for="singupConfirmPassword">Confirmar contraseña</label>
-        	      <input type="password" class="form-control" id="singupConfirmPassword" placeholder="" />
-            </div>
-        </div>
-    </div>
-  	<div class="form-group">
-        <div class="row">
-            <div class="col-sm-6"> 
-                <label for="singupName">Nombre</label>
-    	          <input type="email" class="form-control" id="singupName" placeholder="" />
-            </div>
-            <div class="col-sm-6"> 
-                <label for="singupLastname">Apellidos</label>
-    	          <input type="email" class="form-control" id="singupLastname" placeholder="" />
-            </div>
-        </div>
-  	</div>
-   	<div class="form-group">
-        <label for="singupGender">Sexo</label>
-    	  <select class="selectpicker" id="singupGender">
-    		    <option>Masculino</option>
-    		    <option>Femenino</option>
-    	  </select>
-  	</div>
-    <div class="form-group">
-        <label for="singupPhone">Teléfono</label>
-        <input type="phone" class="form-control" id="singupPhone" />
-    </div>
-  	<div class="form-group">
-  		   <button type="submit" class="btn btn-primary">Crear cuenta</button>
-  	</div>
-</form>
+<h1>Registro de nuevo usuario</h1><br />
+<div ng-controller="singup" ng-init='data = <?=json_encode($data);?>; checkPreviousData();'>
+  <?php if ( count($errors) ): ?>
+  <ul class="alert alert-danger" style="list-style-position: inside">
+    <?php foreach($errors as $error): ?>
+    <li><?= $error; ?></li>
+    <?php endforeach; ?>
+  </ul>
+  <?php endif; ?>
+  <form autocomplete="off" novalidate action="<?= $this->url->get('singup'); ?>" name="singup_form" id="singup_form" method="post" ng-submit="submit()">
+
+      <div class="form-group has-feedback" ng-class="{'has-success': singup_form.username.$valid, 'has-error': singup_form.username.$invalid && singup_form.username.$dirty}">
+          <label for="singupUsername" class="control-label">Nombre de usuario</label>
+          <input type="text" name="username" class="form-control" id="singupUsername" placeholder="Nombre de usuario" ng-model="data.username"  required ng-unique="username"  ng-pattern="/^[a-z0-9]{4,24}$/i" />
+          <span class="glyphicon form-control-feedback"  ng-class="{'glyphicon-ok': singup_form.username.$valid, 'glyphicon-remove': singup_form.username.$invalid && singup_form.username.$dirty}"></span>
+          <div class="help-block" ng-if="singup_form.username.$dirty" ng-messages="singup_form.username.$error" role="alert" ng-messages-multiple ng-messages-include="templates/ng-messages.html" ng-init="messages={pattern: 'El nombre de usuario debe tener entre 4 y 24 carácteres alfanuméricos de longitud {a-z, 0-9}'}"></div>
+      </div>
+
+    	<div class="form-group has-feedback" ng-class="{'has-success': singup_form.email.$valid, 'has-error': singup_form.email.$invalid && singup_form.email.$dirty}">
+      	  <label for="singupEmail" class="control-label">E-mail</label>
+      	  <input type="email" ng-unique="email" name="email" class="form-control" id="singupEmail" placeholder="E-mail" ng-model="data.email" required ng-minlength="5" ng-maxlength="40" />
+          <span class="glyphicon form-control-feedback"  ng-class="{'glyphicon-ok': singup_form.email.$valid, 'glyphicon-remove': singup_form.email.$invalid && singup_form.email.$dirty}"></span>
+          <div class="help-block" ng-if="singup_form.email.$dirty" ng-messages="singup_form.email.$error" role="alert" ng-messages-multiple ng-messages-include="templates/ng-messages.html" ng-init="messages={minlength: 'De 5 a 40 carácteres de longitud'}; messages.maxlength=messages.minlength;"></div>
+    	</div>
+    	<div class="form-group row">
+          <div class="col-sm-6 fix-margin-xs has-feedback" ng-class="{'has-success': singup_form.password.$valid && !singup_form.confirmPassword.$error.compare, 'has-error': singup_form.password.$invalid && singup_form.password.$dirty || singup_form.confirmPassword.$error.compare}">  
+              <label for="singupPassword" class="control-label">Contraseña</label>
+              <input type="password" class="form-control" id="singupPassword" placeholder="Escribe tu contraseña" name="password" ng-model="data.password" required ng-minlength="8" ng-maxlength="60" />
+              <span class="glyphicon form-control-feedback"  ng-class="{'glyphicon-ok': singup_form.password.$valid && !singup_form.confirmPassword.$error.compare, 'glyphicon-remove': singup_form.password.$invalid && singup_form.password.$dirty || singup_form.confirmPassword.$error.compare}"></span>
+              <div class="help-block" ng-if="singup_form.password.$dirty" ng-messages="singup_form.password.$error" role="alert" ng-messages-multiple ng-messages-include="templates/ng-messages.html" ng-init="messages={minlength: 'De 8 a 60 carácteres de longitud'}; messages.maxlength=messages.minlength;"></div>
+          </div>
+
+          <div class="col-sm-6 has-feedback" ng-class="{'has-success': singup_form.confirmPassword.$valid, 'has-error': singup_form.confirmPassword.$invalid && singup_form.confirmPassword.$dirty}"> 
+       	      <label for="singupConfirmPassword" class="control-label">Confirmar contraseña</label>
+      	      <input type="password" class="form-control" id="singupConfirmPassword" placeholder="Repite la contraseña" name="confirmPassword" ng-model="data.confirmPassword" required ng-minlength="8" ng-maxlength="60" ng-compare="data.password" />
+              <span class="glyphicon form-control-feedback"  ng-class="{'glyphicon-ok': singup_form.confirmPassword.$valid, 'glyphicon-remove': singup_form.confirmPassword.$invalid && singup_form.confirmPassword.$dirty}"></span>
+              <div class="help-block" ng-if="singup_form.confirmPassword.$dirty" ng-messages="singup_form.confirmPassword.$error" role="alert" ng-messages-multiple ng-messages-include="templates/ng-messages.html" ng-init="messages={minlength: 'De 8 a 60 carácteres de longitud', compare: 'La constraseña no coincide'}; messages.maxlength=messages.minlength;"></div>
+          </div>
+      </div>
+
+      <div class="form-group row">
+          <div class="col-sm-6 fix-margin-xs has-feedback" ng-class="{'has-success': singup_form.firstname.$valid, 'has-error': singup_form.firstname.$invalid && singup_form.firstname.$dirty}">  
+              <label for="singupFirstname" class="control-label">Nombre</label>
+              <input type="text" class="form-control" id="singupName" placeholder="Escribe tu nombre" name="firstname" ng-model="data.firstname" required ng-pattern="/^[a-z ñáéíóú]{4,30}$/i" />
+              <span class="glyphicon form-control-feedback"  ng-class="{'glyphicon-ok': singup_form.firstname.$valid, 'glyphicon-remove': singup_form.firstname.$invalid && singup_form.firstname.$dirty}"></span>
+              <div class="help-block" ng-if="singup_form.firstname.$dirty" ng-messages="singup_form.firstname.$error" role="alert" ng-messages-multiple ng-messages-include="templates/ng-messages.html" ng-init="messages={pattern: 'Nombre inválido (sólo letras y espacios entre 4 y 30 carácteres)'}"></div>
+          </div>
+
+          <div class="col-sm-6 has-feedback" ng-class="{'has-success': singup_form.lastname.$valid, 'has-error': singup_form.lastname.$invalid && singup_form.lastname.$dirty}"> 
+              <label for="singupLastname" class="control-label">Apellido</label>
+              <input type="text" class="form-control" id="singupLastname" placeholder="Escribe tu apellido" name="lastname" ng-model="data.lastname" required ng-pattern="/^[a-z ñáéíóú]{4,30}$/i" />
+              <span class="glyphicon form-control-feedback"  ng-class="{'glyphicon-ok': singup_form.lastname.$valid, 'glyphicon-remove': singup_form.lastname.$invalid && singup_form.lastname.$dirty}"></span>
+              <div class="help-block" ng-if="singup_form.lastname.$dirty" ng-messages="singup_form.lastname.$error" role="alert" ng-messages-multiple ng-messages-include="templates/ng-messages.html" ng-init="messages={pattern: 'Apellido inválido (sólo letras y espacios entre 4 y 30 carácteres)'}"></div>
+          </div>
+      </div>
+     	<div class="form-group has-feedback" ng-class="{'has-success': singup_form.gender.$valid, 'has-error': singup_form.gender.$invalid && singup_form.gender.$dirty}">
+          <label for="singupGender"  class="control-label">Sexo</label>
+      	  <select class="form-control" id="singupGender" name="gender" ng-model="data.gender" required>
+              <option value=''>Selecciona una opción</option>
+      		    <option value="male">Masculino</option>
+      		    <option value="female">Femenino</option>
+      	  </select>
+          <span class="glyphicon form-control-feedback"  ng-class="{'glyphicon-ok': singup_form.gender.$valid, 'glyphicon-remove': singup_form.gender.$invalid && singup_form.gender.$dirty}"></span>
+          <div class="help-block" ng-if="singup_form.gender.$dirty" ng-messages="singup_form.gender.$error" role="alert" ng-messages-multiple ng-messages-include="templates/ng-messages.html" ng-init="messages={};"></div>
+    	</div>
+      <div class="form-group has-feedback" ng-class="{'has-success': singup_form.phone.$valid, 'has-error': singup_form.phone.$invalid && singup_form.phone.$dirty}"> 
+          <label for="singupLastname" class="control-label">Teléfono</label>
+          <input type="text" class="form-control" id="singupLastname" placeholder="Escribe tu teléfono" name="phone" ng-model="data.phone" ng-pattern="/^[0-9]{10}$/i" required />
+          <span class="glyphicon form-control-feedback"  ng-class="{'glyphicon-ok': singup_form.phone.$valid, 'glyphicon-remove': singup_form.phone.$invalid && singup_form.phone.$dirty}"></span>
+          <div class="help-block" ng-if="singup_form.phone.$dirty" ng-messages="singup_form.phone.$error" role="alert" ng-messages-multiple ng-messages-include="templates/ng-messages.html" ng-init="messages={pattern: 'Solo se admiten 10 digitos sin espacios, lada + número'}"></div>
+      </div>  
+      <div class="form-group row">
+        <div class="col-sm-6">
+          <img class="img-responsive  " ng-src="{{config.view.captchaSrc}}" />
+        </div> 
+      </div>       
+      <div class="form-group row singup-captcha">
+          <div class="col-sm-6 has-feedback" ng-class="{'has-success': singup_form.captcha.$valid, 'has-error': singup_form.captcha.$invalid && singup_form.captcha.$dirty}"  ng-init="active=false">
+            <label class="control-label">¿Eres un tronko?</label>
+            <input type="text" class="form-control" name="captcha" ng-model="data.captcha" required placeholder="Escribe lo que ves en la imagen :)" />
+            <span class="glyphicon form-control-feedback"  ng-class="{'glyphicon-ok': singup_form.captcha.$valid, 'glyphicon-remove': singup_form.captcha.$invalid && singup_form.captcha.$dirty}"></span>
+            <div class="form-control-static">¿Es ilegible?, elige otra imagen <span class="glyphicon glyphicon-refresh" ng-click="getCaptcha()" ng-mousedown="active=true" ng-mouseup="active=false" ng-mouseleave="active=false" ng-class="{'active': active}"></span></div>
+            <div class="help-block" ng-if="singup_form.captcha.$dirty" ng-messages="singup_form.captcha.$error" role="alert" ng-messages-multiple ng-messages-include="templates/ng-messages.html"></div>
+          </div>
+      </div>
+    	<div class="form-group">
+    		   <button type="submit" class="btn btn-primary">Crear cuenta</button>
+    	</div>
+  </form>
+</div>

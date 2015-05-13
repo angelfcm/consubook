@@ -3,7 +3,7 @@
 USE consubook;
 
 CREATE TABLE cbk_user_role (
-	id INT AUTO_INCREMENT PRIMARY KEY,
+	id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 	name VARCHAR(64) NOT NULL,
 	permission TEXT
 )
@@ -12,7 +12,7 @@ ENGINE=InnoDB
 ;
 
 CREATE TABLE cbk_user_account (
-	id INT AUTO_INCREMENT PRIMARY KEY,
+	id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 	username VARCHAR(40) NOT NULL UNIQUE,
 	email VARCHAR(255) NOT NULL UNIQUE,
 	password VARCHAR(255) NOT NULL,
@@ -22,7 +22,9 @@ CREATE TABLE cbk_user_account (
 	age TINYINT UNSIGNED CHECK(age BETWEEN 1 AND 150),
 	phone VARCHAR(30),
 	address VARCHAR(100),
-	user_role_id INT DEFAULT NULL,
+	user_role_id INT UNSIGNED DEFAULT NULL,
+	created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+	modified_at DATETIME DEFAULT NULL,
 	FOREIGN KEY(user_role_id) REFERENCES cbk_user_role(id)
 	ON UPDATE CASCADE  #Si se actualiza un grupo de usuario, esta columna se actualizará.
 	ON DELETE SET NULL #Si se borra un grupo de usuario, esta columna será puesta como NULL
@@ -31,11 +33,25 @@ COLLATE='utf8_unicode_ci'
 Engine=InnoDB
 ;
 
-
-CREATE TABLE cbk_user_resources(
-	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE cbk_user_resources (
+	id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	controller VARCHAR(45) NOT NULL,
 	action VARCHAR(45) NOT NULL
+)
+COLLATE='utf8_unicode_ci'
+Engine=InnoDB
+;
+
+CREATE TABLE cbk_user_confirmation (
+	id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	account_id INT UNSIGNED NOT NULL UNIQUE,
+	code VARCHAR(255) NOT NULL UNIQUE,
+	confirmed BOOLEAN DEFAULT FALSE,
+	created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+	modified_at DATETIME DEFAULT NULL,
+	FOREIGN KEY(account_id) REFERENCES cbk_user_account(id)
+	ON UPDATE CASCADE
+	ON DELETE CASCADE
 )
 COLLATE='utf8_unicode_ci'
 Engine=InnoDB

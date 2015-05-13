@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Consubook - Confirmación de cuenta</title>
+</head>
+<body style="margin: 0; padding: 0; text-align: center; font-family:'HelveticaNeue','Helvetica Neue',Helvetica,Arial,sans-serif;">
+	<div style="background-color: #1d9ce5; ">
+            <a href="<?=$this->config['application']['publicUrl'];?>" target="_blank"><img src="<?=$this->config->application->publicUrl .'/'. $this->config->consubook->http_logo; ?>" height="50" /></a>
+        </div>
+	<h3>
+		Gracias por registrarte <strong><?= $account->firstname; ?></strong>!
+	</h3>
+        <h4>Resumen del registro:</h4>
+        <table style="text-align: left; margin: 0 auto; background-color: #eee; border: 1px solid #000" >
+            <tr><td style="text-align: right"><strong>Nombre personal: </strong></td><td> <?= $account->firstname.' '.$account->lastname; ?></td></tr>
+            <tr><td style="text-align: right"><strong>Nombre de usuario: </strong></td><td><?= $account->username; ?></td></tr>
+            <tr><td style="text-align: right"><strong>Email: </strong></td><td><?= $account->email; ?></td></tr>
+            <tr><td style="text-align: right"><strong>Fecha y hora: </strong></td><td><?= $account->created_at; ?></td></tr>
+        </table>
+	<p>Para poder seguir utilizando tu cuenta, es necesario que confirmes tu correo electrónico presionando en el siguiente botón: </p>
+	<div>
+		<a href="<?= $this->config->application->publicUrl."/singup/confirmEmail/{$confirmation->code}"/*$this->url->get(array('for' => 'singup/confirmEmail', 'code' => $confirmatio->code));*/ ?>" style="text-decoration: none; display: inline-block; background-color: #54b4eb; padding: 8px; color: #fff; text-align: center; cursor: pointer; font-size: 18px;">Confirmar!</a>
+	</div>
+</body>
+</html>

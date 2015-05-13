@@ -1,0 +1,75 @@
+InvalidArgumentException Object
+(
+    [message:protected] => Parameter 'index' must be a long/integer
+    [string:Exception:private] => 
+    [code:protected] => 0
+    [file:protected] => C:\xampp\htdocs\consubook\app\controllers\SingupController.php
+    [line:protected] => 43
+    [trace:Exception:private] => Array
+        (
+            [0] => Array
+                (
+                    [file] => C:\xampp\htdocs\consubook\app\controllers\SingupController.php
+                    [line] => 43
+                    [function] => offsetGet
+                    [class] => Phalcon\Validation\Message\Group
+                    [type] => ->
+                    [args] => Array
+                        (
+                            [0] => username
+                        )
+
+                )
+
+            [1] => Array
+                (
+                    [file] => C:\xampp\htdocs\consubook\app\controllers\SingupController.php
+                    [line] => 21
+                    [function] => validateForm
+                    [class] => SingupController
+                    [type] => ->
+                    [args] => Array
+                        (
+                        )
+
+                )
+
+            [2] => Array
+                (
+                    [function] => indexAction
+                    [class] => SingupController
+                    [type] => ->
+                    [args] => Array
+                        (
+                        )
+
+                )
+
+            [3] => Array
+                (
+                    [function] => dispatch
+                    [class] => Phalcon\Dispatcher
+                    [type] => ->
+                    [args] => Array
+                        (
+                        )
+
+                )
+
+            [4] => Array
+                (
+                    [file] => C:\xampp\htdocs\consubook\public\index.php
+                    [line] => 27
+                    [function] => handle
+                    [class] => Phalcon\Mvc\Application
+                    [type] => ->
+                    [args] => Array
+                        (
+                        )
+
+                )
+
+        )
+
+    [previous:Exception:private] => 
+)

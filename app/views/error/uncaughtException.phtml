@@ -1,0 +1,12 @@
+<div class="jumbotron alert-danger">
+	<h1>Error interno</h1>
+	<p>
+		<ul class="list-group">
+			<li class="list-group-item"><strong>Mensaje: </strong><?=$exception->getMessage();?></li>
+			<li class="list-group-item"><strong>Archivo: </strong><?=$exception->getFile();?></li>
+			<li class="list-group-item"><strong>Línea: </strong><?=$exception->getLine();?></li>
+			<li class="list-group-item"><strong>Ruta: </strong><br /><?=str_replace("\n", "<br />" ,$exception->getTraceAsString());?></li>
+		</ul>
+	</p>
+	<p><a class="btn btn-primary btn-lg" role="button" href="<?php echo $this->url->get('/'); ?>">Ir a la página inicial</a></p>
+</div>

@@ -1,0 +1,6 @@
+<div class="form-group has-feedback" ng-class="{'has-success': element.scope[element.name].$valid, 'has-error': element.scope[element.name].$invalid && element.scope[element.name].$dirty}">
+	<label for="element.id" class="control-label">{{element.label}}</label>
+  	<input type="element.type" name="{{element.name}}" class="form-control" id="element.id" placeholder="{{element.placeholder}}" ng-model="element.model[element.name]" ng-required="element.validate.required" ng-minlength="element.validate.minlength" ng-maxlength="element.validate.maxlength" ng-pattern="element.validate.pattern"  />
+	<span class="glyphicon form-control-feedback"  ng-class="{'glyphicon-ok': element.scope[element.name].$valid, 'glyphicon-remove': element.scope[element.name].$invalid && element.scope[element.name].$dirty}"></span>
+  	<div class="help-block" ng-if="element.scope[element.name].$dirty" ng-messages="element.scope[element.name].$error" role="alert" ng-messages-multiple ng-messages-include="templates/ng-messages.html" ng-init="messages=element.messages"></div>
+</div>
