@@ -2,6 +2,8 @@
 // ANGULAR
 ***********/
 
+var ROOT = '/consubook/';
+
 var ngConfig = {
 
 };
@@ -17,8 +19,8 @@ var ngDirectives = {
 
 	   				var field = attrs.ngUnique;
 	   				var routes = {
-	   					'username': '/consubook/singup/checkUsername',
-	   					'email': '/consubook/singup/checkEmail'
+	   					'username': ROOT+'singup/checkUsername',
+	   					'email': ROOT+'singup/checkEmail'
 	   				};
 	   				var defer = $q.defer();
 
@@ -89,7 +91,7 @@ var ngControllers = {
 					if ( element.name )
 						$scope.singup_form[element.name].$setDirty();
 				});
-				alert('Por favor, revisa los campos inválidos.');
+				alert('Por favor, revisa los campos.');
 			} 
 			else 
 				singup_form.submit();
@@ -122,17 +124,53 @@ var ngControllers = {
 
 	}],
 
+	login: ['$scope', '$http', function($scope, $http){
 
+		$('#loginForm').submit(function(ev){ev.preventDefault()});
+
+		$scope.user = {
+			username_email: '',
+			password: ''
+		};
+		$scope.errors = [];
+
+		$scope.submit = function() {
+
+			var username = '';
+			var email = '';
+
+			if ( $scope.user.username_email.match(/^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i) )  // sacado de https://github.com/angular/angular.js/blob/master/src/ng/directive/input.js#L788
+				email = $scope.user.username_email;
+			else
+				username = $scope.user.username_email;
+
+			$http.post(ROOT+'user/login/', {username: username, email: email, password: $scope.user.password, remember: $scope.user.remember}).success(function(response){
+
+				if ( response.valid ){
+					location.reload();
+				} else if ( response.errors ) {
+					$scope.errors = response.errors;
+				} else
+					$scope.errors = ['Error interno, prueba más tarde.'];
+
+			}).error(function(){
+				$scope.errors = ['Error interno, prueba más tarde.'];
+			});
+
+		};
+
+	}]
 };
 
-var ngConsubook = angular.module('consubook', ['ngMessages']);
+var ngConsubook = angular.module('consubook', ['ngMessages', 'ngCookies']);
 
 ngConsubook
 	.directive('ngUnique', ngDirectives.ngUnique)
 	.directive('ngCompare', ngDirectives.ngCompare);
 
 ngConsubook
-	.controller('singup', ngControllers.singup);
+	.controller('singup', ngControllers.singup)
+	.controller('login', ngControllers.login);
 
 /***********
 // JQUERY
@@ -209,3 +247,32 @@ $(function(){
 		});
 	});
 });
+
+
+function setCookie(name, value, expireDays) 
+{
+	//var dayname = ['Sun', 'Mon', 'Tue' , 'Wed', 'Thu', 'Fri', 'Sat'];
+	//var monthname = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+	if ( ! expireDays || isNaN(expireDays) )
+		expireDays = 0;
+
+	var date = new Date();
+	date.setDate(date.getDate() + expireDays);
+
+	document.cookie = name+'='+value+';expires='+date.toGMTString();
+}
+
+function getCookie(name) 
+{
+	var cookie = document.cookie.match(new RegExp(name+'=(.*?);'));
+	return cookie ? cookie[1] : '';
+}
+
+function removeCookie(name)
+{
+	var date = new Date();
+	date.setDate(date.getDate()-1);
+
+	document.cookie = name+'=;expires='+date.toGMTString();
+}

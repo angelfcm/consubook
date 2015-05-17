@@ -142,9 +142,16 @@ $di->set('acl', function() {
 
             $permissions = unserialize($role->permission);
 
-            foreach( $permissions as $perm ) {
-                if ( $perm['allow'] )
-                    $acl->allow($role->name, $perm['controller'], $perm['action']);
+            if ( is_array($permissions) ) {
+                try {
+                    foreach( $permissions as $perm ) {
+                        if ( $perm['allow'] )
+                            $acl->allow($role->name, $perm['controller'], $perm['action']);
+                    }
+                } catch( Exception $ex ) {
+                    echo $ex->getMessage();
+                    exit;
+                }
             }
         }
 
@@ -174,4 +181,16 @@ $di->set('mail', function(){
 
 $di->set('router', function() {
     return require __DIR__ . '/routers.php';
+});
+
+$di->setShared('cookies', function () {
+    $cookies = new Phalcon\Http\Response\Cookies();
+    $cookies->useEncryption(false);
+    return $cookies;
+});
+
+$di->setShared('crypt', function() use ($config) {
+    $crypt = new Phalcon\Crypt();
+    $crypt->setKey($config->application->crypt_key);
+    return $crypt;
 });

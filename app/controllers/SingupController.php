@@ -2,7 +2,6 @@
 
 use Phalcon\Forms\Element\Text;
 use Phalcon\Validation\Validator;
-use Forms\SingupForm;
 
 class SingupController extends ControllerBase
 {
@@ -129,20 +128,7 @@ class SingupController extends ControllerBase
 
         $img->show(); 
     }
-
-    public function checkCaptchaAction()
-    {
-        $this->view->disable();
-        $this->output['valid'] = false;
-        if ( $this->request->isGet() && $this->request->get('key') ) {
-            $this->output['valid'] = $this->validateCaptcha($this->request->get('key'));
-        } else {
-            $this->output['errors'][] = "Bad GET request data.";
-        }
-
-        echo json_encode($this->output);
-    }
-
+    
     protected function validateForm() 
     {
         $this->validation->add('username', new Validator\Regex(array(

@@ -2,13 +2,14 @@
 
 namespace Lib;
 
+use Phalcon\Validation\Validator;
+
 class User extends \Phalcon\Di\Injectable {
 
-	protected $username = '',
-			  $is_authenticated = false,
+	protected $is_authenticated = false,
 			  $role = '',
-			  $session = array(),
-			  $data = array();
+			  $session = null,
+			  $data = null;
 
 	const ROLE_GUEST = 'Guest';
 	const ROLE_ACCOUNT = 'Account';
@@ -17,27 +18,40 @@ class User extends \Phalcon\Di\Injectable {
 	public function __construct(\Phalcon\Session\AdapterInterface $session) 
 	{
 		$this->session = $session;
+		$this->setRole(self::ROLE_DEFAULT);
 
-		$this->authenticate();
+		$username = "";
+		$email = "";
+		$password = "";
+
+		if ( ( $this->cookies->has('username') || $this->cookies->has('email') ) && $this->cookies->has('password') ) {
+
+			$username = $this->cookies->get('username');
+			$username = $username->getValue();
+			$email = $this->cookies->get('email');
+			$email = $email->getValue();
+			$password = $this->cookies->get('password');
+			$password = $this->crypt->decrypt($password->getValue());
+		}
+
+		$this->authenticate($username, $email, $password);
 	}
 
 	public function authenticate( $username = "" , $email = "", $password = "" )
 	{
 		$auth_params = ($username != "" || $email != "") && $password != "";
 
-		if ( $this->session->has('user') && !$auth_params ) {
+		if ( !$this->session->has('user') && !$auth_params ) {
+			return false;
+		}
 
-			$session_user = $this->session->get('user');
+		if ( $this->session->has('user') ) {
 
-			$this->setRole($session_user['role']);
-			$this->username = $session_user['username'];
-			$this->is_authenticated = $session_user['is_authenticated'];
-
-			return true;
-
+			$account = \CbkUserAccount::findFirst(array(
+				'id = ?0',
+				'bind' => array($this->session->get('user')['account_id'])
+			));
 		} else if ( $auth_params ) {
-
-			$this->unauthenticate();
 
 			$account = \CbkUserAccount::findFirst(
 				array(
@@ -46,24 +60,34 @@ class User extends \Phalcon\Di\Injectable {
 				)
 			);
 
-			if ( $account ) {
-
-				if ( $this->security->checkHash($password, $account->password) ) {
-
-					$this->setRole($account->CbkUserRole ? $account->CbkUserRole->name : self::ROLE_GUEST);
-					$this->username = $account->username;
-					$this->is_authenticated = true;
-
-					$this->session->set('user', array(
-						'role' => $this->getRole(),
-						'username' => $this->getUsername(),
-						'is_authenticated' => $this->isAuthenticated()
-					));
-				}
-				return true;
-			}
+			if ( $account && ! $this->security->checkHash($password, $account->password) )
+				$account = null;
 		}
-		 
+
+		if ( $account ) {
+
+			$this->setRole($account->CbkUserRole ? $account->CbkUserRole->name : self::ROLE_GUEST);
+			$this->is_authenticated = true;
+
+			$this->session->set('user', array(
+				'account_id' => $account->id
+			));
+
+			$this->data = array(
+				'account_id' => $account->id,
+				'username' => $account->username,
+				'email' => $account->email,
+				'firstname' => $account->firstname,
+				'lastname' => $account->lastname,
+				'gender' => $account->gender,
+				'phone' => $account->phone,
+				'address' => $account->address,
+				'created_at' => $account->created_at,
+				'modified_at' => $account->modified_at
+			);
+
+			return true;
+		}
 		$this->unauthenticate();
 
 		return false;
@@ -72,10 +96,16 @@ class User extends \Phalcon\Di\Injectable {
 	public function unauthenticate()
 	{
 		$this->setRole(self::ROLE_DEFAULT);
-		$this->username = "";
 		$this->is_authenticated = false;
 
-		$this->session->remove('user');	
+		
+		$this->data = null;
+
+		setcookie('username', '', -time(), $this->config->application->baseUri);
+		setcookie('email', '', -time(), $this->config->application->baseUri);
+		setcookie('password', '', -time(), $this->config->application->baseUri);
+
+		$this->session->destroy();
 	}
 
 	public function isAuthenticated()
@@ -83,9 +113,9 @@ class User extends \Phalcon\Di\Injectable {
 		return $this->is_authenticated;
 	}
 
-	public function getUsername()
+	public function getInfo($prop)
 	{
-		return $this->username;
+		return $this->data[$prop];
 	}
 
 	private function setRole($role)

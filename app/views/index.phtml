@@ -8,8 +8,24 @@
 <?php $this->assets->outputJs(); ?>
 	</head>
 	<body>
+
 		<nav class="navbar navbar-default" id="navbar-consubook">
-			<div class="container">
+			<div class="container">	
+
+				<?php if( $this->user->getRole() == \lib\User::ROLE_GUEST && $this->dispatcher->getControllerName() != 'singup'  ): ?>
+				<a tabindex="0" class="btn btn-info navbar-btn navbar-right" role="button" href="<?= $this->url->get('singup'); ?>" ng-href="<?= $this->url->get('singup'); ?>">Registrate!</a>
+				<a tabindex="0" class="btn btn-default navbar-btn navbar-right" role="button" data-toggle="modal" data-target="#loginModal">Ingresar</a>
+				<?php endif; ?>
+
+				<?php if( $this->user->getRole() == \lib\User::ROLE_ACCOUNT  ): ?>
+				<ul class="nav navbar-nav navbar-right">
+				  <li role="presentation"><a href="<?=$this->url->get('user/logout'); ?>">Cerrar sesión</a></li>
+				</ul>
+				<p class="navbar-text navbar-left">Iniciado como <a href="#" class="navbar-link"><?=$this->user->getInfo('firstname'); ?></a></p>
+				<?php endif; ?>
+
+				<div style="clear: both"></div>
+
 		    	<div class="navbar-header inline-block-middle">
 	      			<a class="navbar-brand" href="/" ng-href="<?= $this->url->get('/'); ?>">
 	      				<img alt="Brand" src="<?= $this->url->get($this->config['consubook']['http_logo']); ?>" />
@@ -50,10 +66,43 @@
 
 		</nav>
 <?php if( $this->user->getRole() == \lib\User::ROLE_GUEST && $this->dispatcher->getControllerName() != 'singup'  ): ?>
-		<div class="well well-sm">
- 			<a tabindex="0" class="btn btn-info" role="button" href="<?= $this->url->get('singup'); ?>" ng-href="<?= $this->url->get('singup'); ?>">Registrate!</a>
-    		<a tabindex="0" class="btn btn-default" role="button">Ingresar</a>			
-		</div>
+
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" ng-controller="login">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Inicio de sesión</h4>
+      </div>
+      <div class="modal-body">
+      	<ul class="alert alert-danger" style="list-style-position: inside" ng-show="errors.length">
+      		<li ng-repeat="error in errors">{{error}}</li>
+      	</ul>
+		<form name="loginForm" id="loginForm" action="#" method="post" novalidate ng-submit="submit()" autocomplete="off">
+		  <div class="form-group">
+		    <label for="username_email">Usuario ó email</label>
+		    <input type="text" class="form-control" id="username_email" placeholder="Escribe tu Usuario ó Email" ng-model="user.username_email" autocomplete="off">
+		  </div>
+		  <div class="form-group">
+		    <label for="password">Contraseña</label>
+		    <input type="password" class="form-control" id="password" placeholder="Escribe tu contraseña" ng-model="user.password">
+		  </div>
+		  <div class="checkbox">
+		    <label>
+		      <input type="checkbox" ng-model="user.remember"> Mantenerme conectado
+		    </label>
+		  </div>
+		  <input type="submit" style="position: absolute; left: -9999px; top: -9999px;">
+		</form>
+      </div>
+      <div class="modal-footer">
+      	<button type="button" class="btn btn-primary" ng-click="submit()">Conectarme!</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <?php endif; ?>
 		<div class="container" ng-view>
 			<?= $this->getContent(); ?>

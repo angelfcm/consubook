@@ -56,3 +56,28 @@ CREATE TABLE cbk_user_confirmation (
 COLLATE='utf8_unicode_ci'
 Engine=InnoDB
 ;
+
+
+delimiter $$
+
+CREATE PROCEDURE deleteUnconfirmedAccounts ()
+BEGIN
+	DELETE user.*  FROM 
+		cbk_user_account as user 
+		INNER JOIN cbk_user_confirmation as confirm 
+		ON user.id = confirm.account_id  
+	WHERE DATE_ADD(confirm.created_at, INTERVAL 2 DAY) < NOW();
+END
+$$
+
+CREATE EVENT `deleteUnconfirmedAccounts`
+	ON SCHEDULE
+		EVERY 1 HOUR
+	DO BEGIN
+
+	CALL deleteUnconfirmedAccounts ();
+
+END
+$$
+
+delimiter ;

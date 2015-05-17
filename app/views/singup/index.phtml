@@ -76,7 +76,7 @@
       </div>       
       <div class="form-group row singup-captcha">
           <div class="col-sm-6 has-feedback" ng-class="{'has-success': singup_form.captcha.$valid, 'has-error': singup_form.captcha.$invalid && singup_form.captcha.$dirty}"  ng-init="active=false">
-            <label class="control-label">¿Eres un tronko?</label>
+            <label class="control-label">¿Eres humano?</label>
             <input type="text" class="form-control" name="captcha" ng-model="data.captcha" required placeholder="Escribe lo que ves en la imagen :)" />
             <span class="glyphicon form-control-feedback"  ng-class="{'glyphicon-ok': singup_form.captcha.$valid, 'glyphicon-remove': singup_form.captcha.$invalid && singup_form.captcha.$dirty}"></span>
             <div class="form-control-static">¿Es ilegible?, elige otra imagen <span class="glyphicon glyphicon-refresh" ng-click="getCaptcha()" ng-mousedown="active=true" ng-mouseup="active=false" ng-mouseleave="active=false" ng-class="{'active': active}"></span></div>
