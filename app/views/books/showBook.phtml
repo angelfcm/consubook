@@ -1,0 +1,73 @@
+<div id="book">
+	<div class="page-header">
+		<h1><?=$book->title;?></h1>
+	</div>
+	<div class="row">
+		<div class="col-sm-4 text-center">
+			<div class="panel panel-primary">
+				<div class="panel-heading"><?=$book->title;?> - <?=$book->author;?></div>
+				<div class="panel-body" style="text-align: center">
+					<img class="img-thumbnail" src="http://www.revistasacademicas.usmp.edu.pe/_uploads/0e9ea-libro5.jpg" style="max-height: 400px" />
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-8">
+			<div class="panel panel-primary">
+				<div class="panel-heading">Información del libro</div>
+				<div class="panel-body" style="text-align: center">
+					<div class="row">
+						<div class="col-sm-4">
+							<h4>Autor</h4>
+							<div class="well well-sm"><a href="<?= $this->url->get(array('for'=>'search', 'filter' => 'author', 'query' => str_replace(' ', '+', $book->author)));?>"><?=$book->author;?></a></div>
+						</div>
+						<div class="col-sm-4">
+							<h4>Editorial</h4>
+							<div class="well well-sm"><a href="<?= $this->url->get(array('for'=>'search', 'filter' => 'editorial', 'query' => str_replace(' ', '+', $book->editorial)));?>"><?=$book->editorial;?></a></div>
+						</div>
+						<div class="col-sm-4">
+							<h4>Año</h4>
+							<div class="well well-sm"><?=$book->year;?></div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-4">
+							<h4>Género</h4>
+							<div class="well well-sm"><?=$book->genre?$book->genre:'&nbsp;';?></div>
+						</div>
+						<div class="col-sm-4">
+							<h4>ISBN</h4>
+							<div class="well well-sm"><?=$book->isbn?$book->isbn:'&nbsp;';?></div>
+						</div>
+						<div class="col-sm-4">
+							<h4>Ejemplares</h4>
+							<div class="well well-sm"><?=$book->copies;?></div>
+						</div>
+					</div>
+					<div class="row">
+
+						<div class="col-sm-4">
+							<h4>Disponibles</h4>
+							<div class="well well-sm"><?=$book->availables;?></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-4">
+			<div class="panel panel-primary">
+				<div class="panel-heading">Compartir</div>
+				<div class="panel-body">
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-8">
+			<div class="panel panel-primary">
+				<div class="panel-heading">Opciones del libro</div>
+				<div class="panel-body">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

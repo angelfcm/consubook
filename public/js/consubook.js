@@ -159,6 +159,53 @@ var ngControllers = {
 
 		};
 
+	}],
+
+	search: ['$scope', '$http', function($scope, $http){
+
+		$('#quickSearchForm').submit(function(ev){ ev.preventDefault()});
+		// Ejecuta la búsqueda si se presiona intro en el control de búsqueda
+		$('#consubook-btn-search').keypress(function(ev){
+			if ( ev.which == 13 )
+				$scope.doSearch();
+		});
+
+		$scope.search = {
+		};
+
+		$scope.doSearch = function()
+		{
+			if ( $scope.quickSearchForm.$invalid ) {
+				$scope.$apply(function(){
+					$scope.quickSearchForm.query.$setDirty();
+				});
+				return;
+			}
+			location.href = ROOT+'search/'+$scope.search.filter+'/'+$scope.search.query.replace(/ /g, '+')+'/';
+			//$('#quickSearchForm').attr('action', ROOT+'search/'+$scope.search.filter+'/'+$scope.search.query+'/');
+			//$(quickSearchForm.filter).removeAttr('name');
+			//$(quickSearchForm.query).removeAttr('name');
+			//quickSearchForm.submit();
+		};
+		// Soluciona el problema de controles radio del filtro de búsqueda presentados como .button-group de boostrap
+		// EL problema consiste en que angular no reconoce los cambios de los controles cuando el usuario clickea en cualquiera de ellos
+		// incluso el mismo javascript no sabe cuando uno de los elementos esta en checked por defecto.
+		angular.element(document).ready(function() {
+
+			$('#quickSearchForm input:radio').each(function(i, input){
+				if ( $(input).attr('checked') || $scope.search.filter == $(input).val() ) {
+					$(input).parent('.btn').addClass('active');
+					input.checked = true;
+				}
+			});
+
+			$scope.$watch(function(){ return $(quickSearchForm.filter).filter(':checked').val(); }, function(value){ $scope.search.filter = value; });
+			$scope.$digest();
+			$('.btn-group .btn input:radio').on('change', function(){
+				$scope.$digest();
+			});
+			
+		});
 	}]
 };
 
@@ -170,7 +217,8 @@ ngConsubook
 
 ngConsubook
 	.controller('singup', ngControllers.singup)
-	.controller('login', ngControllers.login);
+	.controller('login', ngControllers.login)
+	.controller('search', ngControllers.search);
 
 /***********
 // JQUERY
@@ -201,6 +249,7 @@ $(function(){
 
 // Crea las instancias para los popover y soluciona el problema de posicionamiento al cambiar el tamaño de ventana
 $(function(){
+
 	$("[data-toggle=popover]").each(function(i, obj){
 		var $this = $(this);
 		var $popover = $($this.attr('data-target'));

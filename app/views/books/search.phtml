@@ -1,0 +1,138 @@
+<div id="searchBooks">
+
+<?php if (count($books) > 0): /*==== if books ====*/ ?>
+
+<div class="page-header">
+	<h1>
+	<?php 
+		$output = "<small>Resultados encontrados para";
+		switch( $filter ) {
+			case 'title': 
+				$output .= " el título";
+			break;
+			case 'author':
+				$output .= " el autor";
+			break;
+			case 'editorial':
+				$output .= " la editorial";
+			break;
+		}
+		$output .= "</small> \"<i>{$query}</i>\"";
+		echo $output;
+	?>
+	</h1>
+</div>
+<div class="alert alert-success" role="alert">
+	<span class="label label-success pull-right">Página <?= $currentPage; ?> de <?= $totalPages ?></span><?= $totalResults ;?> libros encontrados!
+</div>
+
+<div class="well well-sm">
+	<form class="form-inline" action="" method="GET">
+		<div class="form-group">
+			<input type="hidden" name="dir" value="<?=$orderDirection;?>" />
+			<label form="searhOrderBy">Ordernar por</label>
+			<select id="searhOrderBy" name="order" onchange="this.form.submit()">
+<?php 
+	$filters_str = array(
+		'relevance' => 'Relevancia',
+		'title' => 'Título',
+		'author' => 'Autor',
+		'editorial' => 'Editorial'
+	);
+
+foreach( $this->config->search->filtersOrder as $filterOrder ):?>
+<?php if ( $oneWordQuery && $filterOrder != 'relevance' || !$oneWordQuery ): ?>
+				<option value="<?=$filterOrder;?>" <?=$filterOrder==$orderBy?'selected':'';?>><?=isset($filters_str[$filterOrder])?$filters_str[$filterOrder]:$filterOrder;?></option>
+<?php endif; endforeach; ?>
+			</select>
+			<a href="<?= $this->url->get(array('for'=>'search', 'filter' => $filter, 'query' => $query_link, 'page' => $currentPage))."?order=".$orderBy."&dir=".($orderDirection=='asc'?'desc':'asc');?>"><span class="glyphicon glyphicon-arrow-<?=$orderDirection=='asc'?'down':'up';?>"></span></a>
+		</div>
+	</form>
+</div>
+
+<div class="row">
+<?php $i = 0; foreach ( $books  as $book ): /*==== print books ====*/ ?><div class="col-md-3 col-sm-4 col-xs-12 inline-block">
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<?=$book->title;?>
+			</div>
+			<div class="panel-body">
+				<a class="thumbnail" href="<?= $this->url->get(array('for'=>'book', 'title' => strtolower(str_replace(' ', '-', $book->title))));?>">
+					<img class="" src="http://www.revistasacademicas.usmp.edu.pe/_uploads/0e9ea-libro5.jpg" />
+				</a>
+				<ul class="list-group">
+  					<li class="list-group-item">Autor: <a href="<?= $this->url->get(array('for'=>'search', 'filter' => 'author', 'query' => str_replace(' ', '+', $book->author)));?>"><?=$book->author;?></a></li>
+  					<li class="list-group-item">Editorial: <a href="<?= $this->url->get(array('for'=>'search', 'filter' => 'editorial', 'query' => str_replace(' ', '+', $book->editorial)));?>"><?=$book->editorial;?></a></li>
+  				</ul>
+			</div>
+		</div><!--
+	    <div class="thumbnail">
+      		<a href="<?= $this->url->get(array('for'=>'book', 'title' => strtolower(str_replace(' ', '-', $book->title))));?>"><img src="http://www.revistasacademicas.usmp.edu.pe/_uploads/0e9ea-libro5.jpg" alt="..."></a>
+      		<div class="caption">
+        		<h3><a href="<?= $this->url->get(array('for'=>'book', 'title' => strtolower(str_replace(' ', '-', $book->title))));?>"><?=$book->title;?></a></h3>
+        		<p>
+        			Autor: <a href="<?= $this->url->get(array('for'=>'search', 'filter' => 'author', 'query' => str_replace(' ', '+', $book->author)));?>"><?=$book->author;?></a><br/>
+        			Editorial: <a href="<?= $this->url->get(array('for'=>'search', 'filter' => 'editorial', 'query' => str_replace(' ', '+', $book->editorial)));?>"><?=$book->editorial;?></a>
+        		</p>
+        	</div>
+        </div>-->
+	</div><?php endforeach; /*==== end print books ====*/ ?>
+</div>
+<!-- Start Paginator -->
+<div class="well">
+	<h4>
+		Páginas encontradas
+	</h4>
+	<nav>
+	  <ul class="pagination">
+	<?php if( $currentPage > 1 ):?>
+	    <li class="pull-left">
+	      <a href="<?= $this->url->get(array('for'=>'search', 'filter' => $filter, 'query' => $query_link, 'page' => $currentPage-1))."?order=".$orderBy."&dir=".$orderDirection;?>" aria-label="Previous">
+	        <span aria-hidden="true" class="glyphicon glyphicon-backward"></span>
+	      </a>
+	    </li>
+	<?php endif; ?>
+	<?php 
+		/*==== print pages ====*/ 
+		$startPage = $currentPage;
+		$endPage = $currentPage;
+		$maxPages = $totalPages < $this->config->search->quantitySearchPages ? $totalPages : $this->config->search->quantitySearchPages;
+		$countPages = 1;
+		while( $countPages < $maxPages ) {
+			if ( $startPage - 1 > 0 ) {
+				$countPages++;
+				$startPage--;
+			} 
+			if ( $countPages < $maxPages && $endPage + 1 <= $totalPages ) {
+				$countPages++;
+				$endPage++;
+			}
+		}
+		//$startPage = $currentPage - 4 > 0 ? $currentPage - 4 : 1;
+		//$endPage = $currentPage + 4 < $totalPages ? $currentPage + 4 : $totalPages;
+		for ( $page = $startPage; $page <= $endPage; $page++ ): 
+	?>
+		<li <?= $page == $currentPage? 'class="active"' : ''; ?>>
+			<a href="<?= $this->url->get(array('for'=>'search', 'filter' => $filter, 'query' => $query_link, 'page' => $page))."?order=".$orderBy."&dir=".$orderDirection;?>"><?=$page;?></a>
+		</li>
+	<?php endfor; /*==== end print pages ====*/ ?>
+	<?php if( $currentPage < $totalPages ):?>
+	    <li class="pull-right">
+	      <a href="<?= $this->url->get(array('for'=>'search', 'filter' => $filter, 'query' => $query_link, 'page' => $currentPage+1))."?order=".$orderBy."&dir=".$orderDirection;?>" aria-label="Next">
+	        <span aria-hidden="true" class="glyphicon glyphicon-forward"></span>
+	      </a>
+	    </li>
+	<?php endif; ?>
+	  </ul>
+	</nav>
+</div>
+<!-- End Paginator -->
+
+<?php else: ?>
+<div class="alert alert-danger" role="alert">
+	Lo sentimos, no se encontraron coincidencias con los criterios de búsqueda especificados.
+</div>
+
+<?php endif; /*==== endif books ====*/ ?>
+
+</div>

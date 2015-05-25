@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"max-",
+				"max-height"
+			],
+			[
 				"username",
 				"username_email"
 			],
@@ -40,51 +44,75 @@
 	"buffers":
 	[
 		{
-			"file": "app/views/index.phtml",
+			"file": "app/controllers/BooksController.php",
 			"settings":
 			{
-				"buffer_size": 4934,
+				"buffer_size": 4629,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "app/lib/User.php",
+			"file": "public/css/consubook.css",
 			"settings":
 			{
-				"buffer_size": 3105,
+				"buffer_size": 2661,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "app/controllers/UserController.php",
+			"file": "app/views/books/showBook.phtml",
 			"settings":
 			{
-				"buffer_size": 2547,
+				"buffer_size": 2361,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "app/config/config.ini",
+			"file": "app/views/singup/index.phtml",
 			"settings":
 			{
-				"buffer_size": 1055,
+				"buffer_size": 10273,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "public/js/consubook.js",
+			"file": "app/controllers/ErrorController.php",
 			"settings":
 			{
-				"buffer_size": 7293,
+				"buffer_size": 648,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "app/config/services.php",
+			"file": "app/views/books/search.phtml",
 			"settings":
 			{
-				"buffer_size": 5234,
+				"buffer_size": 5774,
 				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/config/routers.php",
+			"settings":
+			{
+				"buffer_size": 491,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "SQL.txt",
+			"settings":
+			{
+				"buffer_size": 2941,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/models/CbkBooks.php",
+			"settings":
+			{
+				"buffer_size": 1467,
+				"line_ending": "Unix"
 			}
 		}
 	],
@@ -131,38 +159,48 @@
 	[
 		"/C/xampp/htdocs/consubook",
 		"/C/xampp/htdocs/consubook/app",
-		"/C/xampp/htdocs/consubook/app/config",
-		"/C/xampp/htdocs/consubook/app/controllers",
-		"/C/xampp/htdocs/consubook/app/lib",
 		"/C/xampp/htdocs/consubook/app/models",
+		"/C/xampp/htdocs/consubook/app/views",
 		"/C/xampp/htdocs/consubook/app/views/singup",
 		"/C/xampp/htdocs/consubook/public",
-		"/C/xampp/htdocs/consubook/public/js"
+		"/C/xampp/htdocs/consubook/public/css",
+		"/C/xampp/htdocs/consubook/public/js",
+		"/C/xampp/htdocs/consubook/vendor"
 	],
 	"file_history":
 	[
+		"/C/Users/Angel/Desktop/test/app/models/CbkBooks.php",
+		"/C/xampp/htdocs/consubook/app/views/index.phtml",
+		"/C/xampp/htdocs/consubook/SQL.txt",
+		"/C/Users/Angel/Google Drive/Tareas ITS/4to Semestre/proyecto-consubook/consubook/biblioteca_itsz.sql",
 		"/C/xampp/htdocs/consubook/app/config/config.ini",
+		"/C/xampp/htdocs/consubook/public/js/consubook.js",
+		"/C/xampp/htdocs/consubook/app/config/routers.php",
+		"/C/xampp/htdocs/consubook/public/css/consubook.css",
 		"/C/xampp/htdocs/consubook/app/controllers/ControllerBase.php",
-		"/C/xampp/htdocs/consubook/app/controllers/IndexController.php",
-		"/C/xampp/htdocs/consubook/app/lib/User.php",
-		"/C/xampp/htdocs/consubook/app/config/services.php",
+		"/C/xampp/htdocs/consubook/app/views/books/search.phtml",
+		"/C/xampp/htdocs/consubook/app/views/email-templates/account-confirmation.phtml",
 		"/C/xampp/htdocs/consubook/app/controllers/SingupController.php",
+		"/C/xampp/htdocs/consubook/vendor/securimage/securimage.php",
+		"/C/xampp/htdocs/consubook/app/lib/User.php",
 		"/C/xampp/htdocs/consubook/app/controllers/UserController.php",
+		"/C/xampp/htdocs/consubook/app/config/services.php",
+		"/C/xampp/htdocs/convertir-tabla-a-insert-mysql.html",
+		"/C/Users/Angel/Desktop/convertir-tabla-a-insert-mysql.html",
+		"/C/xampp/htdocs/sendmail.php",
+		"/C/xampp/htdocs/consubook/sendmail.php",
+		"/C/xampp/htdocs/consubook/app/controllers/IndexController.php",
 		"/C/xampp/htdocs/consubook/app/views/index/index.volt",
 		"/C/xampp/htdocs/consubook/app/views/user/login.phtml",
 		"/D/keys4f/system/library/customer.php",
 		"/C/xampp/htdocs/consubook/public/templates/login.html",
-		"/C/xampp/htdocs/consubook/public/js/consubook.js",
 		"/C/xampp/htdocs/consubook/app/models/CbkUserConfirmation.php",
 		"/C/xampp/htdocs/consubook/app/models/CbkUserAccount.php",
 		"/C/xampp/htdocs/consubook/app/models/CbkUserRole.php",
 		"/C/xampp/htdocs/consubook/app/views/singup/index.phtml",
-		"/C/xampp/htdocs/consubook/SQL.txt",
-		"/C/xampp/htdocs/consubook/app/views/email-templates/account-confirmation.phtml",
 		"/C/xampp/htdocs/consubook/app/lib/Mail.php",
 		"/C/xampp/htdocs/consubook/app/views/singup/confirmEmail.phtml",
 		"/C/xampp/htdocs/consubook/app/views/singup/success.phtml",
-		"/C/xampp/htdocs/consubook/app/config/routers.php",
 		"/C/xampp/htdocs/consubook/app/views/layouts/singup.phtml",
 		"/C/Windows/System32/drivers/etc/hosts",
 		"/C/Users/Angel/Desktop/hosts",
@@ -173,8 +211,6 @@
 		"/D/keys4f/catalog/view/theme/default/template/mail/order_processed.tpl",
 		"/C/xampp/htdocs/consubook/public/index.php",
 		"/C/xampp/htdocs/consubook/app/config/config.php",
-		"/C/xampp/htdocs/consubook/app/views/index.phtml",
-		"/C/xampp/htdocs/consubook/public/css/consubook.css",
 		"/C/xampp/htdocs/consubook/app/forms/SingupForm.php",
 		"/C/xampp/htdocs/consubook/public/templates/default-form-input.html",
 		"/C/xampp/htdocs/consubook/public/templates/ng-messages.html",
@@ -218,7 +254,7 @@
 	],
 	"find":
 	{
-		"height": 34.0
+		"height": 27.0
 	},
 	"find_in_files":
 	{
@@ -233,6 +269,11 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"ready",
+			"form",
+			"forms",
+			"username_email",
+			"username",
 			"setCookie",
 			"unauthenticate",
 			"cookie",
@@ -299,24 +340,172 @@
 	"groups":
 	[
 		{
-			"selected": 5,
+			"selected": 2,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "app/views/index.phtml",
+					"file": "app/controllers/BooksController.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4934,
+						"buffer_size": 4629,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4088,
-								4088
+								2260,
+								2260
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1881.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "public/css/consubook.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2661,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2590,
+								2590
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2014.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "app/views/books/showBook.phtml",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2361,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2160,
+								2160
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "app/views/singup/index.phtml",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 10273,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								686,
+								686
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 228.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "app/controllers/ErrorController.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 648,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								645,
+								645
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "app/views/books/search.phtml",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5774,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2749,
+								2749
 							]
 						],
 						"settings":
@@ -325,143 +514,84 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "app/lib/User.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3105,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								872,
-								872
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 54.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "app/controllers/UserController.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2547,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1327,
-								1327
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 162.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "app/config/config.ini",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 1055,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								10,
-								10
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 521.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "public/js/consubook.js",
+					"buffer": 6,
+					"file": "app/config/routers.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 7293,
+						"buffer_size": 491,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								6606,
-								6615
+								379,
+								379
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/PHP/PHP.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 4081.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 5,
 					"type": "text"
 				},
 				{
-					"buffer": 5,
-					"file": "app/config/services.php",
+					"buffer": 7,
+					"file": "SQL.txt",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5234,
+						"buffer_size": 2941,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								5045,
-								5045
+								1869,
+								1869
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 798.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "app/models/CbkBooks.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1467,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1467,
+								1467
 							]
 						],
 						"settings":
@@ -471,10 +601,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 2961.0,
+						"translation.y": 1091.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 6,
 					"type": "text"
 				}
 			]
@@ -482,7 +612,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 26.0
+		"height": 27.0
 	},
 	"input":
 	{
@@ -519,7 +649,7 @@
 	"project": "consubook.sublime-project",
 	"replace":
 	{
-		"height": 48.0
+		"height": 50.0
 	},
 	"save_all_on_build": true,
 	"select_file":

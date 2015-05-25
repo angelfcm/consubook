@@ -23,7 +23,7 @@
     </table>
     </center>
 	<div style="padding: 10px; margin-bottom: 10px;">Para poder seguir utilizando tu cuenta, es necesario que confirmes tu correo electrónico presionando el siguiente botón: </div>
-	<a href="<?= $this->config->application->publicUrl."/singup/confirmEmail/{$confirmation->code}"/*$this->url->get(array('for' => 'singup/confirmEmail', 'code' => $confirmatio->code));*/ ?>" >
+	<a href="<?= $this->config->application->publicUrl.$this->url->get(array('for'=>'confirm', 'code' => $confirmation->code)); ?>" >
 		<div style="text-decoration: none; display: inline-block; background-color: #54b4eb; padding: 8px; color: #fff; text-align: center; cursor: pointer; font-size: 18px; border-radius: 3px;">Confirmar!</div>
 	</a>
 </div>

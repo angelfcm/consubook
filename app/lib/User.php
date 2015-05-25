@@ -31,7 +31,10 @@ class User extends \Phalcon\Di\Injectable {
 			$email = $this->cookies->get('email');
 			$email = $email->getValue();
 			$password = $this->cookies->get('password');
-			$password = $this->crypt->decrypt($password->getValue());
+			$password = $password->getValue();
+			if ( strlen($password) > strlen($this->config->application->crypt_key) ) // se asegura que la contraseña sea de longitud más larga que la llave de encriptación ya que es un requisito para la desencriptación o habrá excepción no controlada
+				$password = $this->crypt->decrypt($password);
+			else $password = "";
 		}
 
 		$this->authenticate($username, $email, $password);

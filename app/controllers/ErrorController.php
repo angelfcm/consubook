@@ -22,5 +22,4 @@ class ErrorController extends ControllerBase
         
         $this->view->setVar('exception', $this->dispatcher->getParam('exception'));
     }
-
 }

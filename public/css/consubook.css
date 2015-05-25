@@ -98,3 +98,42 @@ input.ng-invalid.ng-dirty {
 .singup-captcha .active {
     font-size: 18px;
 }
+
+/* ===== Fuerza a los botones de la barra de navegación alineados a la derecha a estar alineados a la derecha cuando pantalla tiene dimensions XS =====*/
+.navbar-btn.navbar-right {
+    float: right;
+}
+
+.modal-header {
+    background-image: -webkit-linear-gradient(#54b4eb, #2fa4e7 60%, #1d9ce5);
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#54b4eb), color-stop(60%, #2fa4e7), to(#1d9ce5));
+    background-image: linear-gradient(#54b4eb, #2fa4e7 60%, #1d9ce5);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff54b4eb', endColorstr='#ff1d9ce5', GradientType=0);
+    background-repeat: no-repeat;
+    border-bottom: 1px solid #178acc;
+}
+
+.modal-header .close {
+    color: #fff;
+    font-size: 24px;
+    opacity: 1;
+    filter: alpha(opacity=100);
+}
+
+.modal-title {
+    color: #fff;
+}
+
+#searchBooks .thumbnail > img {
+    max-height: 250px;
+}
+
+.inline-block {
+    vertical-align: top;
+    float: none;
+    display: inline-block;
+}
+
+#book .thumbnail img, #book .img-responsive {
+    max-height: 400px;
+}

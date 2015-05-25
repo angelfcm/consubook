@@ -100,7 +100,8 @@ class SingupController extends ControllerBase
 
     public function showCaptchaAction() 
     {
-        $img = new \Lib\Securimage\Securimage();
+        require __DIR__.'/../../vendor/securimage/securimage.php';
+        $img = new \Securimage();
 
         // You can customize the image by making changes below, some examples are included - remove the "//" to uncomment
 
@@ -121,7 +122,7 @@ class SingupController extends ControllerBase
         // see securimage.php for more options that can be set
         $img->image_width  = 270;
         $img->image_height = 70; 
-        $img->captcha_type= \Lib\Securimage\Securimage::SI_CAPTCHA_WORDS;
+        $img->captcha_type= \Securimage::SI_CAPTCHA_WORDS;
 
         // set namespace if supplied to script via HTTP GET
         if (!empty($_GET['namespace'])) $img->setNamespace($_GET['namespace']);

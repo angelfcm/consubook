@@ -57,7 +57,39 @@ COLLATE='utf8_unicode_ci'
 Engine=InnoDB
 ;
 
+CREATE TABLE cbk_books (
+	id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+	title VARCHAR(100) UNIQUE,
+	author VARCHAR(50),
+	editorial VARCHAR(50),
+	year YEAR,
+	isbn VARCHAR(13) UNIQUE,
+	code VARCHAR(30) UNIQUE,
+	genre VARCHAR(30),
+	image VARCHAR(255),
+	copies INT(3) NOT NULL DEFAULT 0,
+	availables INT(3) NOT NULL DEFAULT 0,
+	created_at DATETIME DEFAULT NOW(),
+	modified_at DATETIME DEFAULT NULL,
 
+	FULLTEXT INDEX (title),
+	FULLTEXT INDEX (author),
+	FULLTEXT INDEX (editorial)
+)
+COLLATE='utf8_unicode_ci'
+Engine=InnoDB
+;
+/*
+CREATE TABLE IF NOT EXISTS `prestamos` (
+`id` int(11) NOT NULL,
+  `id_libro` int(11) NOT NULL,
+  `fecha_prestamo` date DEFAULT NULL,
+  `fecha_entrega_limite` date NOT NULL,
+  `fecha_entrega_real` date NOT NULL,
+  `numero_control` int(11) NOT NULL,
+  `entregado` tinyint(1) NOT NULL
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=19 ;
+*/
 delimiter $$
 
 CREATE PROCEDURE deleteUnconfirmedAccounts ()
