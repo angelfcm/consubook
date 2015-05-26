@@ -58,7 +58,7 @@ foreach( $this->config->search->filtersOrder as $filterOrder ):?>
 			</div>
 			<div class="panel-body">
 				<a class="thumbnail" href="<?= $this->url->get(array('for'=>'book', 'title' => strtolower(str_replace(' ', '-', $book->title))));?>">
-					<img class="" src="http://www.revistasacademicas.usmp.edu.pe/_uploads/0e9ea-libro5.jpg" />
+					<img class="" src="<?=$this->url->get(array('for'=>'book-cover', 'image' => $book->image));?>" />
 				</a>
 				<ul class="list-group">
   					<li class="list-group-item">Autor: <a href="<?= $this->url->get(array('for'=>'search', 'filter' => 'author', 'query' => str_replace(' ', '+', $book->author)));?>"><?=$book->author;?></a></li>

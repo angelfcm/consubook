@@ -31,7 +31,7 @@ class BooksController extends ControllerBase
         if ( ! in_array(strtolower($orderBy), $this->config->search->filtersOrder->toArray()) )
             $orderBy = $this->config->search->defaultOrderBy;
         if ( ! in_array(strtolower($orderDirection), array('asc', 'desc')) )
-            $orderBy = $this->config->search->defaultOrderDirection;
+            $orderDirection = $this->config->search->defaultOrderDirection;
 
     	$oneWord = preg_match('/^[^ ]*$/', $query);
 
@@ -129,6 +129,39 @@ class BooksController extends ControllerBase
 
         $this->output['book'] = $book;
         $this->view->setVars($this->output);
+    }
+
+    public function showBookCoverAction()
+    {
+        
+        $image = $this->dispatcher->getParam('image');
+
+        if ( ! $image ) {
+            $this->dispatcher->forward(array(
+                'controller' => 'Error',
+                'action' => 'notFound'
+            ));
+            return false;
+        }
+
+        $title = addslashes(preg_replace(array('/\-/', '/\..+?$/'), array(' ', ''), $image));
+
+        /*$book = CbkBooks::findFirst(array(
+            'title = ?0',
+            'bind' => array($title),
+            'columns' => 'image'
+        ));*/
+
+        $file = new \Lib\File();
+
+        if ( /*! $book ||*/ ! $file->printFile('books/'.$image) ) {
+            $this->dispatcher->forward(array(
+                'controller' => 'Error',
+                'action' => 'notFound'
+            ));
+            return false;
+        }
+        $this->view->disable();
     }
 
 }

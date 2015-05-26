@@ -7,7 +7,7 @@
 			<div class="panel panel-primary">
 				<div class="panel-heading"><?=$book->title;?> - <?=$book->author;?></div>
 				<div class="panel-body" style="text-align: center">
-					<img class="img-thumbnail" src="http://www.revistasacademicas.usmp.edu.pe/_uploads/0e9ea-libro5.jpg" style="max-height: 400px" />
+					<img class="img-thumbnail" src="<?=$this->url->get(array('for'=>'book-cover', 'image' => $book->image));?>" style="max-height: 400px" />
 				</div>
 			</div>
 		</div>

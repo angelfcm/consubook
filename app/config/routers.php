@@ -18,4 +18,9 @@ $router->add('/book/{title}', array(
         'action' => 'showBook'
 ))->setName('book');
 
+$router->add('/book-cover/{image}', array(
+        'controller' => 'books',
+        'action' => 'showBookCover'
+))->setName('book-cover');
+
 return $router;
