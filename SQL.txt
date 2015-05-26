@@ -66,7 +66,7 @@ CREATE TABLE cbk_books (
 	isbn VARCHAR(13) UNIQUE,
 	code VARCHAR(30) UNIQUE,
 	genre VARCHAR(30),
-	image VARCHAR(120) UNIQUE,
+	book_cover_id INT UNSIGNED,
 	copies INT(3) NOT NULL DEFAULT 0,
 	availables INT(3) NOT NULL DEFAULT 0,
 	created_at DATETIME DEFAULT NOW(),
@@ -79,6 +79,21 @@ CREATE TABLE cbk_books (
 COLLATE='utf8_unicode_ci'
 Engine=InnoDB
 ;
+
+CREATE TABLE cbk_books_covers {
+	id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+	image MEDIUMBLOB,
+	extension VARCHAR(10),
+	mime VARCHAR(20),
+	size INT,
+	created_at DATETIME DEFAULT NOW(),
+	modified_at DATETIME DEFAULT NULL,
+	CHECK (extension IN ('jpg', 'jpeg', 'png', 'gif'))
+}
+COLLATE='utf8_unicode_ci'
+Engine=InnoDB
+;
+
 /*
 CREATE TABLE IF NOT EXISTS `prestamos` (
 `id` int(11) NOT NULL,
