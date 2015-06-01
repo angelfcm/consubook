@@ -57,21 +57,35 @@ COLLATE='utf8_unicode_ci'
 Engine=InnoDB
 ;
 
+CREATE TABLE cbk_books_images (
+	id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+	image MEDIUMBLOB,
+	extension VARCHAR(10),
+	size INT,
+	width INT,
+	height INT,
+	created_at DATETIME DEFAULT NOW(),
+	modified_at DATETIME DEFAULT NULL,
+	CHECK (extension IN ('jpg', 'jpeg', 'png', 'gif'))
+)
+COLLATE='utf8_unicode_ci'
+Engine=InnoDB
+;
+
 CREATE TABLE cbk_books (
 	id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-	title VARCHAR(100) UNIQUE,
-	author VARCHAR(50),
+	title VARCHAR(100) NOT NULL,
+	author VARCHAR(50) NOT NULL,
 	editorial VARCHAR(50),
 	year YEAR,
-	isbn VARCHAR(13) UNIQUE,
-	code VARCHAR(30) UNIQUE,
-	genre VARCHAR(30),
-	book_cover_id INT UNSIGNED,
-	copies INT(3) NOT NULL DEFAULT 0,
-	availables INT(3) NOT NULL DEFAULT 0,
+	edition VARCHAR(30),
+	id_category INT UNSIGNED,
+	id_book_image INT UNSIGNED,
 	created_at DATETIME DEFAULT NOW(),
 	modified_at DATETIME DEFAULT NULL,
 
+	FOREIGN KEY(id_book_image) REFERENCES cbk_books_images(id) ON UPDATE CASCADE ON DELETE SET NULL,
+	FOREIGN KEY(id_category) REFERENCES cbk_books_categories(id) ON UPDATE CASCADE ON DELETE SET NULL,
 	FULLTEXT INDEX (title),
 	FULLTEXT INDEX (author),
 	FULLTEXT INDEX (editorial)
@@ -80,19 +94,29 @@ COLLATE='utf8_unicode_ci'
 Engine=InnoDB
 ;
 
-CREATE TABLE cbk_books_covers {
+CREATE TABLE cbk_books_copies (
 	id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-	image MEDIUMBLOB,
-	extension VARCHAR(10),
-	mime VARCHAR(20),
-	size INT,
-	created_at DATETIME DEFAULT NOW(),
-	modified_at DATETIME DEFAULT NULL,
-	CHECK (extension IN ('jpg', 'jpeg', 'png', 'gif'))
-}
+	id_book INT UNSIGNED NOT NULL,
+	isbn VARCHAR(13) UNIQUE,
+	inventary_code VARCHAR(20) UNIQUE,
+	available BOOLEAN,
+	FOREIGN KEY(id_book) REFERENCES cbk_books(id) ON UPDATE CASCADE ON DELETE CASCADE
+)
 COLLATE='utf8_unicode_ci'
 Engine=InnoDB
 ;
+
+CREATE TABLE cbk_books_categories (
+	id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+	name VARCHAR(80) NOT NULL,
+	code VARCHAR(20),
+	parent_id INT UNSIGNED,
+	FOREIGN KEY(parent_id) REFERENCES cbk_books_categories(id) ON UPDATE CASCADE ON DELETE CASCADE
+)
+COLLATE='utf8_unicode_ci'
+Engine=InnoDB
+;
+
 
 /*
 CREATE TABLE IF NOT EXISTS `prestamos` (
@@ -128,3 +152,12 @@ END
 $$
 
 delimiter ;
+
+
+
+INSERT INTO `cbk_user_resources` (`id`, `controller`, `action`) VALUES (1, 'Index', 'index');
+INSERT INTO `cbk_user_resources` (`id`, `controller`, `action`) VALUES (2, 'User', 'index');
+INSERT INTO `cbk_user_resources` (`id`, `controller`, `action`) VALUES (3, 'User', 'singup');
+INSERT INTO `cbk_user_resources` (`id`, `controller`, `action`) VALUES (4, 'User', 'login');
+INSERT INTO `cbk_user_role` (`id`, `name`, `permission`) VALUES (1, 'Guest', 'a:3:{i:0;a:3:{s:10:"controller";s:4:"User";s:6:"action";s:6:"singup";s:5:"allow";b:1;}i:1;a:3:{s:10:"controller";s:5:"Index";s:6:"action";s:5:"index";s:5:"allow";b:1;}i:2;a:3:{s:10:"controller";s:4:"User";s:6:"action";s:5:"login";s:5:"allow";i:1;}}');
+INSERT INTO `cbk_user_role` (`id`, `name`, `permission`) VALUES (2, 'Account', '');

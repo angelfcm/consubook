@@ -65,6 +65,20 @@ $di->set('db', function () use ($config) {
 });
 
 /**
+ * Auxiliar a usar el servicio "db" por sus limitaciones con SQL crudo.
+ */
+$di->set('pdo', function() use ($config) {
+    $connection = new \Pdo(
+        'mysql: hostname=' . $config->database->host . '; dbname=' .$config->database->dbname,
+        $config->database->username,
+        $config->database->password
+    );
+    $connection->exec("set names ".$config->database->charset);
+
+    return $connection;
+});
+
+/**
  * If the configuration specify the use of metadata adapter use it or use memory otherwise
  */
 $di->set('modelsMetadata', function () {
@@ -92,7 +106,7 @@ $di->set('dispatcher', function() use ($di) {
         $eventsManager = $di->getShared('eventsManager');
 
         $eventsManager->attach('dispatch:beforeException', function($event, $dispatcher, $exception) {
-               
+            
                 switch ($exception->getCode()) {
 
                     case Dispatcher::EXCEPTION_HANDLER_NOT_FOUND:
@@ -100,7 +114,7 @@ $di->set('dispatcher', function() use ($di) {
                         $dispatcher->forward(
                             array(
                                 'controller' => 'error',
-                                'action' => 'notFound',
+                                'action' => 'notFound'
                             )
                         );
                         return false;
@@ -194,3 +208,4 @@ $di->setShared('crypt', function() use ($config) {
     $crypt->setKey($config->application->crypt_key);
     return $crypt;
 });
+

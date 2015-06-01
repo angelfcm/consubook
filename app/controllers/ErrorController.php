@@ -1,5 +1,9 @@
 <?php
 
+// Es importante no usar ControllerBase y ser llamado unicamente por dispatcher->forward() para no llamar dos veces al inicializador de ControllerBase y duplicar datos de salida
+
+use Phalcon\Mvc\Controller;
+
 class ErrorController extends ControllerBase
 {
 

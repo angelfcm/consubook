@@ -37,37 +37,19 @@ class CbkBooks extends \Phalcon\Mvc\Model
      *
      * @var string
      */
-    public $isbn;
-
-    /**
-     *
-     * @var string
-     */
-    public $code;
-
-    /**
-     *
-     * @var string
-     */
-    public $genre;
-
-    /**
-     *
-     * @var string
-     */
-    public $image;
+    public $edition;
 
     /**
      *
      * @var integer
      */
-    public $copies;
+    public $id_category;
 
     /**
      *
      * @var integer
      */
-    public $availables;
+    public $id_book_image;
 
     /**
      *
@@ -82,6 +64,16 @@ class CbkBooks extends \Phalcon\Mvc\Model
     public $modified_at;
 
     /**
+     * Initialize method for model.
+     */
+    public function initialize()
+    {
+        $this->hasMany('id', 'CbkBooksCopies', 'id_book');
+        $this->belongsTo('id_category', 'CbkBooksCategories', 'id');
+        $this->belongsTo('id_book_image', 'CbkBooksImages', 'id');
+    }
+
+    /**
      * Independent Column Mapping.
      */
     public function columnMap()
@@ -92,12 +84,9 @@ class CbkBooks extends \Phalcon\Mvc\Model
             'author' => 'author', 
             'editorial' => 'editorial', 
             'year' => 'year', 
-            'isbn' => 'isbn', 
-            'code' => 'code', 
-            'genre' => 'genre', 
-            'image' => 'image', 
-            'copies' => 'copies', 
-            'availables' => 'availables', 
+            'edition' => 'edition', 
+            'id_category' => 'id_category', 
+            'id_book_image' => 'id_book_image', 
             'created_at' => 'created_at', 
             'modified_at' => 'modified_at'
         );

@@ -1,8 +1,6 @@
 <?php
 
-use Phalcon\Mvc\Model\Validator;
-
-class CbkUserConfirmation extends \Phalcon\Mvc\Model
+class CbkBooksImages extends \Phalcon\Mvc\Model
 {
 
     /**
@@ -13,21 +11,33 @@ class CbkUserConfirmation extends \Phalcon\Mvc\Model
 
     /**
      *
-     * @var integer
+     * @var string
      */
-    public $account_id;
+    public $image;
 
     /**
      *
      * @var string
      */
-    public $code;
+    public $extension;
 
     /**
      *
      * @var integer
      */
-    public $confirmed;
+    public $size;
+
+    /**
+     *
+     * @var integer
+     */
+    public $width;
+
+    /**
+     *
+     * @var integer
+     */
+    public $height;
 
     /**
      *
@@ -46,7 +56,7 @@ class CbkUserConfirmation extends \Phalcon\Mvc\Model
      */
     public function initialize()
     {
-        $this->belongsTo('account_id', 'CbkUserAccount', 'id');
+        $this->hasMany('id', 'CbkBooks', 'id_book_image');
     }
 
     /**
@@ -56,21 +66,14 @@ class CbkUserConfirmation extends \Phalcon\Mvc\Model
     {
         return array(
             'id' => 'id', 
-            'account_id' => 'account_id', 
-            'code' => 'code', 
-            'confirmed' => 'confirmed', 
+            'image' => 'image', 
+            'extension' => 'extension', 
+            'size' => 'size', 
+            'width' => 'width', 
+            'height' => 'height', 
             'created_at' => 'created_at', 
             'modified_at' => 'modified_at'
         );
-    }
-
-    public function isCodeUnique()
-    {
-        $this->validate(new Validator\Uniqueness(array(
-            'field' => 'code'
-        )));
-
-        return !$this->validationHasFailed();
     }
 
 }

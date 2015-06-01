@@ -20,6 +20,11 @@ try {
     include __DIR__ . "/../app/config/services.php";
 
     /**
+     * Funciones globales de utilidad 
+     */
+    include __DIR__ . "/../app/Lib/utility-functions.php";
+
+    /*
      * Handle the request
      */
     $application = new \Phalcon\Mvc\Application($di);

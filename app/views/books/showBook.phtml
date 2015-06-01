@@ -7,7 +7,17 @@
 			<div class="panel panel-primary">
 				<div class="panel-heading"><?=$book->title;?> - <?=$book->author;?></div>
 				<div class="panel-body" style="text-align: center">
-					<img class="img-thumbnail" src="<?=$this->url->get(array('for'=>'book-cover', 'image' => $book->image));?>" style="max-height: 400px" />
+					<img class="img-thumbnail" src="<?php
+						if ( $book->CbkBooksImages	 ) {
+							echo $this->url->get(
+							array(
+								'for'=>'book-cover', 
+								'author' => strtolower(str_replace(' ', '-', $book->author)), 
+								'title_and_extension' => strtolower(str_replace(' ', '-', $book->title)).'.'.$book->CbkBooksImages->extension
+							));
+						} else 
+							echo $this->url->get('/img/portada-no-disponible.jpg');
+					?>" style="max-height: 400px" />
 				</div>
 			</div>
 		</div>
@@ -18,11 +28,11 @@
 					<div class="row">
 						<div class="col-sm-4">
 							<h4>Autor</h4>
-							<div class="well well-sm"><a href="<?= $this->url->get(array('for'=>'search', 'filter' => 'author', 'query' => str_replace(' ', '+', $book->author)));?>"><?=$book->author;?></a></div>
+							<div class="well well-sm"><a href="<?= $this->url->get(array('for'=>'search', 'filter' => 'author', 'query' => str_replace(' ', '+', $book->author)));?>?order=author"><?=$book->author;?></a></div>
 						</div>
 						<div class="col-sm-4">
 							<h4>Editorial</h4>
-							<div class="well well-sm"><a href="<?= $this->url->get(array('for'=>'search', 'filter' => 'editorial', 'query' => str_replace(' ', '+', $book->editorial)));?>"><?=$book->editorial;?></a></div>
+							<div class="well well-sm"><a href="<?= $this->url->get(array('for'=>'search', 'filter' => 'editorial', 'query' => str_replace(' ', '+', $book->editorial)));?>?order=editorial"><?=$book->editorial;?></a></div>
 						</div>
 						<div class="col-sm-4">
 							<h4>Año</h4>
@@ -32,22 +42,18 @@
 					<div class="row">
 						<div class="col-sm-4">
 							<h4>Género</h4>
-							<div class="well well-sm"><?=$book->genre?$book->genre:'&nbsp;';?></div>
-						</div>
-						<div class="col-sm-4">
-							<h4>ISBN</h4>
-							<div class="well well-sm"><?=$book->isbn?$book->isbn:'&nbsp;';?></div>
+							<div class="well well-sm"><?=$book->CbkBooksCategories?$book->CbkBooksCategories->name:'No disponible';?></div>
 						</div>
 						<div class="col-sm-4">
 							<h4>Ejemplares</h4>
-							<div class="well well-sm"><?=$book->copies;?></div>
+							<div class="well well-sm"><?=$book->CbkBooksCopies?count($book->CbkBooksCopies):0;?></div>
 						</div>
 					</div>
 					<div class="row">
 
 						<div class="col-sm-4">
 							<h4>Disponibles</h4>
-							<div class="well well-sm"><?=$book->availables;?></div>
+							<div class="well well-sm"><?php $copies = 0; if ( $book->CbkBooksCopies ) { foreach ( $book->CbkBooksCopies as $bookCopie ) { if ($bookCopie->available) $copies++; } } echo $copies ;?></div>
 						</div>
 					</div>
 				</div>

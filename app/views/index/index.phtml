@@ -1,0 +1,39 @@
+<main class="col-md-9 col-md-push-3">
+	<h1>Bienvenido a Consubook!</h1>
+</main>
+<aside class="col-md-3 col-md-pull-9">
+	<section class="panel panel-default">
+		<header class="panel-heading" role="tab" id="headingCategories">
+			<h1 class="panel-title"><a data-toggle="collapse" href="#collapseCategories">Categorías</a></h1>
+		</header>
+		<div class="panel-body panel-collapse collapse in" id="collapseCategories">
+			<nav>
+				<ul class="nav nav-pills nav-stacked">
+					<?php foreach( $categories as $categorie ): ?>
+						<li role="presentation"><a role="menuitem" tabindex="-1" href="#"><?= $categorie->name ;?>
+						</a></li>
+					<?php endforeach; ?>
+	
+<?php /*
+recursiveForeach($subcategories, array('parent_field' => 'info', 'children_field' => 'children'), array(
+'onBeforeChildren' => function($data, $hasChildren){
+	if ( $hasChildren ) {
+		echo '<li><a role="menuitem" tabindex="-1" data-toggle="collapse" href="#collapseSubcategories'.$data['id'].'" class="collapsed"><span class="caret"></span> '.$data['name'].'</a>';
+		echo '<div id="collapseSubcategories'.$data['id'].'" class="collapse submenu"><ul class="nav nav-pills nav-stacked">';
+	}
+	else 
+		echo '<li><a>'.$data['name'].'</a>';
+},
+'onAfterChildren' => function($data, $hasChildren){
+	if ( $hasChildren )
+		echo "</ul></div></li>";
+	else
+		echo "</li>";
+}
+));*/
+?>
+				</ul>
+			</nav>
+		</div>
+	</section>
+</aside>

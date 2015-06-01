@@ -11,19 +11,55 @@
 
 		<nav class="navbar navbar-default" id="navbar-consubook">
 			<div class="container">	
-				<?php if( $this->user->getRole() == \lib\User::ROLE_GUEST && $this->dispatcher->getControllerName() != 'singup'  ): ?>
-				<a tabindex="0" class="btn btn-info navbar-btn navbar-right" role="button" href="<?= $this->url->get('singup'); ?>" ng-href="<?= $this->url->get('singup'); ?>">Registrate!</a>
-				<a tabindex="0" class="btn btn-default navbar-btn navbar-right" role="button" data-toggle="modal" data-target="#loginModal">Ingresar</a>
-				<?php endif; ?>
 
-				<?php if( $this->user->getRole() == \lib\User::ROLE_ACCOUNT  ): ?>
-				<ul class="nav navbar-nav navbar-right">
-				  <li role="presentation"><a href="<?=$this->url->get('user/logout'); ?>">Cerrar sesión</a></li>
-				</ul>
-				<p class="navbar-text navbar-left">Iniciado como <a href="#" class="navbar-link"><?=$this->user->getInfo('firstname'); ?></a></p>
-				<?php endif; ?>
+			    <!-- Brand and toggle get grouped for better mobile display -->
+			    <div class="navbar-header">
+				    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapse-top-navs">
+				        <span class="sr-only">Toggle navigation</span>
+				        <span class="icon-bar"></span>
+				        <span class="icon-bar"></span>
+				        <span class="icon-bar"></span>
+				    </button>
+				    <a class="navbar-brand" href="<?= $this->url->get('/');?>">Inicio</a>
+			    </div>
 
-				<div style="clear: both"></div>
+			    <!-- Collect the nav links, forms, and other content for toggling -->
+    			<div class="collapse navbar-collapse" id="collapse-top-navs">
+
+					<ul class="nav navbar-nav">
+						<li class="dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+								Libros por categoría<span class="caret"></span>
+	    					</a>
+	  						<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+							<?php foreach( $categories as $category ): ?>
+								<li role="presentation"><a role="menuitem" tabindex="-1" href="#"><?= $category->name ;?>
+								</a></li>
+							<?php endforeach; ?>
+							</ul>
+						</li>
+					</ul>
+
+					<?php if( $this->user->getRole() == \lib\User::ROLE_ACCOUNT  ): ?>
+					<ul class="nav navbar-nav navbar-right">
+					  	<li class="dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+								Bienvenido <?=$this->user->getInfo('firstname'); ?> <span class="caret"></span>
+	    					</a>
+	  						<ul class="dropdown-menu" role="menu">
+								<li role="presentation"><a role="menuitem" tabindex="-1" href="<?=$this->url->get('user/logout'); ?>">Cerrar sesión</a></li>
+							</ul>
+					  	</li>
+					</ul>
+					<?php endif; ?>
+
+					<?php if( $this->user->getRole() == \lib\User::ROLE_GUEST && $this->dispatcher->getControllerName() != 'singup'  ): ?>
+					<a tabindex="0" class="btn btn-info navbar-btn navbar-right" role="button" href="<?= $this->url->get('singup'); ?>" ng-href="<?= $this->url->get('singup'); ?>">Registrate!</a>
+					<a tabindex="0" class="btn btn-default navbar-btn navbar-right" role="button" data-toggle="modal" data-target="#loginModal">Ingresar</a>
+					<?php endif; ?>
+				</div>
+
+				<div class="clearfix"></div>
 
 		    	<div class="navbar-header inline-block-middle">
 	      			<a class="navbar-brand" href="/" ng-href="<?= $this->url->get('/'); ?>">
@@ -103,7 +139,8 @@
 </div>
 
 <?php endif; ?>
-		<div class="container" ng-view>
+
+		<div class="container-fluid" ng-view>
 			<?= $this->getContent(); ?>
 		</div>
 

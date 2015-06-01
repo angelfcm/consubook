@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"json",
+				"json_encode"
+			],
+			[
+				"CbkBOo",
+				"CbkBooksImages"
+			],
+			[
+				"CbkBooks",
+				"CbkBooksImages"
+			],
+			[
 				"max-",
 				"max-height"
 			],
@@ -47,7 +59,7 @@
 			"file": "app/controllers/BooksController.php",
 			"settings":
 			{
-				"buffer_size": 5524,
+				"buffer_size": 7624,
 				"line_ending": "Windows"
 			}
 		}
@@ -91,29 +103,29 @@
 		"side_bar_visible": false,
 		"status_bar_visible": false
 	},
-	"expanded_folders":
-	[
-		"/C/xampp/htdocs/consubook",
-		"/C/xampp/htdocs/consubook/app",
-		"/C/xampp/htdocs/consubook/app/cache",
-		"/C/xampp/htdocs/consubook/app/views/singup"
-	],
 	"file_history":
 	[
-		"/C/xampp/htdocs/consubook/app/lib/File.php",
-		"/C/xampp/htdocs/consubook/app/config/routers.php",
-		"/C/xampp/htdocs/consubook/SQL.txt",
-		"/C/xampp/htdocs/consubook/public/css/consubook.css",
-		"/C/xampp/htdocs/consubook/app/views/books/showBook.phtml",
+		"/C/xampp/htdocs/consubook/consubook.sublime-project",
+		"/C/xampp/htdocs/consubook/app/controllers/ControllerBase.php",
 		"/C/xampp/htdocs/consubook/app/controllers/ErrorController.php",
-		"/C/xampp/htdocs/consubook/app/views/books/search.phtml",
 		"/C/xampp/htdocs/consubook/app/models/CbkBooks.php",
+		"/C/xampp/htdocs/consubook/app/config/routers.php",
+		"/C/xampp/htdocs/consubook/app/views/books/showBook.phtml",
+		"/C/xampp/htdocs/consubook/app/views/books/search.phtml",
+		"/C/xampp/htdocs/consubook/SQL.txt",
+		"/C/xampp/htdocs/consubook/app/models/CbkBooksCategories.php",
+		"/C/xampp/htdocs/consubook/app/models/CbkBooksCopies.php",
+		"/C/xampp/htdocs/consubook/app/models/CbkBooksImages.php",
+		"/C/xampp/htdocs/consubook/app/models/CbkUserConfirmation.php",
 		"/C/Users/Angel/Desktop/test/app/models/CbkBooks.php",
+		"/C/Users/Angel/Desktop/test/app/config/config.php",
+		"/F/consubook/SQL.txt",
+		"/C/xampp/htdocs/consubook/app/lib/File.php",
+		"/C/xampp/htdocs/consubook/public/css/consubook.css",
 		"/C/xampp/htdocs/consubook/app/views/index.phtml",
 		"/C/Users/Angel/Google Drive/Tareas ITS/4to Semestre/proyecto-consubook/consubook/biblioteca_itsz.sql",
 		"/C/xampp/htdocs/consubook/app/config/config.ini",
 		"/C/xampp/htdocs/consubook/public/js/consubook.js",
-		"/C/xampp/htdocs/consubook/app/controllers/ControllerBase.php",
 		"/C/xampp/htdocs/consubook/app/views/email-templates/account-confirmation.phtml",
 		"/C/xampp/htdocs/consubook/app/controllers/SingupController.php",
 		"/C/xampp/htdocs/consubook/vendor/securimage/securimage.php",
@@ -129,7 +141,6 @@
 		"/C/xampp/htdocs/consubook/app/views/user/login.phtml",
 		"/D/keys4f/system/library/customer.php",
 		"/C/xampp/htdocs/consubook/public/templates/login.html",
-		"/C/xampp/htdocs/consubook/app/models/CbkUserConfirmation.php",
 		"/C/xampp/htdocs/consubook/app/models/CbkUserAccount.php",
 		"/C/xampp/htdocs/consubook/app/models/CbkUserRole.php",
 		"/C/xampp/htdocs/consubook/app/views/singup/index.phtml",
@@ -161,7 +172,6 @@
 		"/D/keys4f/admin/view/template/common/home.tpl",
 		"/D/keys4f/admin/index.php",
 		"/D/keys4f/admin/controller/common/home.php",
-		"/C/Users/Angel/Desktop/test/app/config/config.php",
 		"/C/xampp/htdocs/consubook/public/errr.txt",
 		"/D/keys4f/admin/view/template/catalog/product_form.tpl",
 		"/D/keys4f/admin/controller/catalog/product.php",
@@ -203,6 +213,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"asse",
 			"ready",
 			"form",
 			"forms",
@@ -283,15 +294,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5524,
+						"buffer_size": 7624,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								485,
-								485
+								7279,
+								7279
 							]
 						],
 						"settings":
@@ -301,7 +312,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 171.0,
+						"translation.y": 3049.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,

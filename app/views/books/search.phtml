@@ -1,3 +1,5 @@
+<main class="col-md-9 col-md-push-3">
+
 <div id="searchBooks">
 
 <?php if (count($books) > 0): /*==== if books ====*/ ?>
@@ -57,12 +59,22 @@ foreach( $this->config->search->filtersOrder as $filterOrder ):?>
 				<?=$book->title;?>
 			</div>
 			<div class="panel-body">
-				<a class="thumbnail" href="<?= $this->url->get(array('for'=>'book', 'title' => strtolower(str_replace(' ', '-', $book->title))));?>">
-					<img class="" src="<?=$this->url->get(array('for'=>'book-cover', 'image' => $book->image));?>" />
+				<a class="thumbnail" href="<?= $this->url->get(array('for'=>'book', 'author' => prettyUrlQuery($book->author), 'title' => prettyUrlQuery($book->title)));?>">
+					<img class="" src="<?php
+						if ( $book->hasImage ) {
+							echo $this->url->get(
+							array(
+								'for'=>'book-cover', 
+								'author' => prettyUrlQuery($book->author), 
+								'title_and_extension' => prettyUrlQuery($book->title).'.'.$book->imageExtension
+							));
+						}  else 
+							echo $this->url->get('/img/portada-no-disponible.jpg');
+					?>" />
 				</a>
 				<ul class="list-group">
-  					<li class="list-group-item">Autor: <a href="<?= $this->url->get(array('for'=>'search', 'filter' => 'author', 'query' => str_replace(' ', '+', $book->author)));?>"><?=$book->author;?></a></li>
-  					<li class="list-group-item">Editorial: <a href="<?= $this->url->get(array('for'=>'search', 'filter' => 'editorial', 'query' => str_replace(' ', '+', $book->editorial)));?>"><?=$book->editorial;?></a></li>
+  					<li class="list-group-item">Autor: <a href="<?= $this->url->get(array('for'=>'search', 'filter' => 'author', 'query' => str_replace(' ', '+', $book->author)));?>?order=author"><?=$book->author;?></a></li>
+  					<li class="list-group-item">Editorial: <a href="<?= $this->url->get(array('for'=>'search', 'filter' => 'editorial', 'query' => str_replace(' ', '+', $book->editorial)));?>?order=editorial"><?=$book->editorial;?></a></li>
   				</ul>
 			</div>
 		</div><!--
@@ -79,9 +91,9 @@ foreach( $this->config->search->filtersOrder as $filterOrder ):?>
 	</div><?php endforeach; /*==== end print books ====*/ ?>
 </div>
 <!-- Start Paginator -->
-<div class="well">
+<div class="well well-sm">
 	<h4>
-		Páginas encontradas
+		Páginas de la búsqueda
 	</h4>
 	<nav>
 	  <ul class="pagination">
@@ -136,3 +148,23 @@ foreach( $this->config->search->filtersOrder as $filterOrder ):?>
 <?php endif; /*==== endif books ====*/ ?>
 
 </div>
+
+</main>
+
+<aside class="col-md-3 col-md-pull-9">
+	<section class="panel panel-default">
+		<header class="panel-heading" role="tab" id="headingCategories">
+			<h1 class="panel-title"><a data-toggle="collapse" href="#collapseCategories">Categorías</a></h1>
+		</header>
+		<div class="panel-body panel-collapse collapse in" id="collapseCategories">
+			<nav>
+				<ul class="nav nav-pills nav-stacked">
+					<?php foreach( $books_categories->root as $category ): ?>
+						<li role="presentation"><a role="menuitem" tabindex="-1" href="#"><?= $category->info->name ;?> (<?= $category->num_books ;?>)
+						</a></li>
+					<?php endforeach; ?>
+				</ul>
+			</nav>
+		</div>
+	</section>
+</aside>
