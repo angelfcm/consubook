@@ -19,9 +19,11 @@ class BooksController extends ControllerBase
     {
         $orderBy = $this->request->hasQuery('order') ? $this->request->getQuery('order') : $this->config->search->defaultOrderBy;
         $orderDirection = $this->request->hasQuery('dir') ? $this->request->getQuery('dir') : $this->config->search->defaultOrderDirection;
-        $filter = $this->dispatcher->getParam('filter');
+        $filter = strtolower($this->dispatcher->getParam('filter'));
         $query = $this->dispatcher->getParam('query');
         $page = $this->dispatcher->getParam('page');
+        $category_id = $this->request->hasQuery('category') ? $this->request->getQuery('category') : null;
+        $category_id = CbkBooksCategories::findFirst($category_id) ? $category_id : null;
 
         if ( !$filter  || !$query || ! in_array($filter, $this->config->search->filtersSearch->toArray()) ) {
             $this->response->redirect('/');
@@ -33,6 +35,20 @@ class BooksController extends ControllerBase
         if ( ! in_array(strtolower($orderDirection), array('asc', 'desc')) )
             $orderDirection = $this->config->search->defaultOrderDirection;
 
+        if ( $orderBy == 'category' ) 
+            $orderBy = 'id_category';
+
+        if ( $filter == 'category' ) {
+            if ( $query == 'all' ) { 
+                $category_id = null; // provoca que se busquen libros por todas las categorias
+            } else {
+                $cat_query = CbkBooksCategories::findFirst(array('name = ?0', 'bind' => array($query)));
+                $category_id = $cat_query  ? $cat_query->id : null;
+                if ( ! $cat_query ) 
+                    $this->response->redirect('/');        
+            }
+        }
+
         $oneWord = preg_match('/^[^ ]*$/', $query);
 
         $columns = 'CbkBooksImages.id as hasImage, CbkBooksImages.extension as imageExtension, CbkBooks.id, CbkBooks.title, CbkBooks.author, CbkBooks.editorial, CbkBooks.year, CbkBooks.edition, CbkBooks.id_category, CbkBooks.id_book_image, CbkBooks.created_at, CbkBooks.modified_at';
@@ -40,18 +56,61 @@ class BooksController extends ControllerBase
         $categories_conditions = '';
         $bindData = array($query);
 
+        /* Lista de categorias para filtracion */
+        $categoriesListIds = array($category_id);
+        
+        if ( $category_id ) {
+
+            $subcategories = $this->loadSubcategories($category_id);
+            recursiveForeach(
+                $subcategories,
+                array('parent_field'=>'info', 'children_field'=>'children'),
+                array(
+                    'onBeforeChildren' => function($data, $hasChildren) use (&$categoriesListIds) {
+                        $categoriesListIds[] = (int)$data->id;
+                    },
+                    'onAfterChildren' => function($data, $hasChildren) {
+                    }
+                )
+            ); 
+        }
+        $sqlCategoriesListCondition = '';
+        if ( $category_id )
+            $sqlCategoriesListCondition  = " AND id_category IN(".implode($categoriesListIds, ',').") ";
+
+        /* Busqueda de libros para LIKE o MATCH dependiendo el tamaño y palabras de la consulta */
+        if ( $filter == 'category') 
+        {
+            if ( $orderBy == 'relevance' ) // En consultas LIKE no es posible hacer ordenamiento por relevancia
+                $orderBy = $this->config->search->defaultOrderBy == 'relevance' ? 'category' : $this->config->search->defaultOrderBy;
+
+            if ( $orderBy == 'category' ) 
+                $orderBy = 'id_category';
+
+            $sqlCategoriesListCondition  = " id_category IN(".implode($categoriesListIds, ',').") ";
+
+            // Cálculo del total de los resultados con like y filtrado por categorias
+            $totalResults = CbkBooks::count(array(
+                ($category_id ?  $sqlCategoriesListCondition : '')
+            ));
+        }
+        else
         // Si la consulta de búsqueda es una sola palabra o la longitud es menor a 4 carácteres, se usará like como comodín de búsqueda
         if ( $oneWord || strlen($query) < 4 ) {
 
             if ( $orderBy == 'relevance' ) // En consultas LIKE no es posible hacer ordenamiento por relevancia
                 $orderBy = $this->config->search->defaultOrderBy == 'relevance' ? 'title' : $this->config->search->defaultOrderBy;
 
+            if ( $orderBy == 'category' ) 
+                $orderBy = 'id_category';
+
             $conditions = 'CbkBooks.'.$filter.' LIKE ?0';
             $categories_conditions  = 'books.'.$filter.' LIKE "%'.addslashes($query).'%"';
             $bindData[0] = '%'.$bindData[0].'%';
 
+            // Cálculo del total de los resultados con like y filtrado por categorias
             $totalResults = CbkBooks::count(array(
-                $filter.' LIKE ?0',
+                $filter.' LIKE ?0'.($category_id ?  $sqlCategoriesListCondition : ''),
                 'bind' => array( '%'.$query.'%' )
             ));
 
@@ -61,18 +120,24 @@ class BooksController extends ControllerBase
                 $columns .= ', (MATCH('.$filter.') AGAINST("'.addslashes($query).'")) as relevance';
             }
 
+            if ( $orderBy == 'category' ) 
+                $orderBy = 'id_category';
+
             $conditions = 'MATCH(CbkBooks.'.$filter.') AGAINST(?0)';
             $categories_conditions  = 'MATCH(books.'.$filter.') AGAINST("'.addslashes($query).'")';
 
             $totalResults = CbkBooks::count(array(
-                'MATCH('.$filter.') AGAINST(?0)',
+                'MATCH('.$filter.') AGAINST(?0)'.($category_id ?  $sqlCategoriesListCondition : ''),
                 'bind' => array($query)
             ));
         }
 
+        $books_categories = $this->numBooksInCategory($category_id, $categories_conditions);
+        $books_categories = json_decode(json_encode($books_categories));
+
         // Se utiliza esta forma de consultar en la base de datos ya que al usar find() devuelve las tablas relacionadas y queremos optimizar este proceso en la busqueda rapida de libros.
         $books = CbkBooks::query()
-            ->where($conditions)
+            ->where($conditions.($category_id ?  $sqlCategoriesListCondition : ''))
             ->bind($bindData)
             ->limit($this->config->search->booksPerPage, ($page > 0 ? ($page-1)*$this->config->search->booksPerPage : 0))
             ->order($orderBy.' '.$orderDirection)
@@ -80,103 +145,82 @@ class BooksController extends ControllerBase
             ->leftJoin('CbkBooksImages', 'CbkBooks.id_book_image = CbkBooksImages.id')
             ->execute();
 
-        $sql = 'SELECT id FROM cbk_books_categories WHERE parent_id IS NULL';
-        $sqlresult = $this->pdo->query($sql)->fetchAll();
-
-        foreach( $sqlresult as $row ){
-            $x = $this->countBooksBySubcategories($row['id'], $categories_conditions);
-            echo "{$row['id']}<pre>";print_r($x);echo "</pre>";
-        }exit;
-
-        $books_categories = $this->countBooksBySubcategories(null, $categories_conditions);
-        $books_categories = json_decode(json_encode($books_categories));
-        //echo "<pre>";print_r($books_categories); exit;
-
         $this->output['books'] = $books;
         $this->output['totalResults'] = $totalResults;
         $this->output['currentPage'] = $page > 0 ? $page : 1;
         $this->output['totalPages'] =  ceil($totalResults / $this->config->search->booksPerPage);
         $this->output['query'] = $query;
-        $this->output['query_link'] = str_replace(' ', '+', $query);
         $this->output['filter'] = $filter;
-        $this->output['orderBy'] = $orderBy;
+        $this->output['orderBy'] = $orderBy == 'id_category' ? 'category' : $orderBy;
         $this->output['orderDirection'] = $orderDirection;
         $this->output['oneWordQuery'] = $oneWord;
         $this->output['books_categories'] = $books_categories;
+        $this->output['category_id'] = $category_id;
+        $this->output['lineageCategory'] = $category_id ? $this->loadLineageSubategory($category_id) : null;
+
+        $this->output['getUrlSearch'] = function($urlData = array()) use($filter, $query, $page, $orderBy, $orderDirection, $category_id) {
+
+            $filter = isset($urlData['filter']) ? $urlData['filter'] : $filter;
+            $query = isset($urlData['query']) ? $urlData['query'] : $query;
+            $page = isset($urlData['page']) ? $urlData['page'] : ($page > 0 ? $page : 1);
+            $orderBy = isset($urlData['orderBy']) ? $urlData['orderBy'] : $orderBy;
+            $orderDirection = isset($urlData['orderDirection']) ? $urlData['orderDirection'] : $orderDirection;
+            $category_id = isset($urlData['category_id']) ? $urlData['category_id'] : $category_id;
+
+            return $this->url->get(array(
+                'for'=>'search', 
+                'filter' => $filter, 
+                'query' =>  str_replace(' ', '+', $query), 
+                'page' => $page
+            ))
+            ."?order=".($orderBy == 'id_category' ? 'category' : $orderBy)
+            ."&dir=".$orderDirection
+            .(($category_id && $filter != 'category')? '&category='.$category_id : '');
+        };
+
         $this->view->setVars($this->output);
     }
 
-    /** 
-      * Encuentra la cantidad de libros que hay por categorías jerárquicamente así como la información de las categorías,
-      * si una categoría tiene subcategorías, devolverá la suma de todos los libros encontrados en esa categoría 
-      * más los de sus subcategorías.
-      * Devuelve un array en la forma
-      * [
-      *  'root': [ ['info' => [datos de la categoría], 'num_books': int, children': recursión de 'root' ], ... ]
-      *  'num_books': int
-      * ]
-      */
-    private function countBooksBySubcategories($id, $conditions = "")
+    private function numBooksInCategory($id, $conditions = "")
     {
-        // Si no hay un $id de categoría se comenzará desde las categorías principales
         $columns = 'cats.*, count(*) as num_books';
-        $sql_children = 'SELECT '.$columns.' FROM cbk_books_categories cats LEFT JOIN cbk_books books ON cats.id = books.id_category WHERE '.$conditions.' GROUP BY cats.id';
-        if ( ! $sql_children_result = $this->pdo->query($sql_children) || $sql_parent_result = $this->pdo->query($sql_parent) )
+
+        $sql_cats = 'SELECT '.$columns.' FROM cbk_books_categories cats INNER JOIN cbk_books books ON cats.id = books.id_category '.($conditions ? 'WHERE '.$conditions : '').' GROUP BY cats.id';
+
+        if ( ! $sql_cats_result = $this->pdo->query($sql_cats) )
             throw new Exception($this->pdo->errorInfo()[2]);
 
-        $subcategories = $sql_children_result->fetchAll();
+        $cats = $sql_cats_result->fetchAll();
 
-        if ( count($subcategories) == 0 )
+        if ( count($cats) == 0 )
             return null;
 
-        foreach( $subcategories as $subcategory ) {
-
-            if ( )
-            $subcategory['parent_id'] == NULL;
-        }
-/*
-        if ( $id == null ) {
-            $parent_condition = ' AND cats.parent_id IS NULL';
-        } else {
-            $parent_condition = ' AND cats.parent_id = ' . $id;
-        }
-
-        $columns = 'cats.id, cats.name, count(*) as num_books';
-        $sql_children = 'SELECT '.$columns.' FROM cbk_books_categories cats LEFT JOIN cbk_books books ON cats.id = books.id_category WHERE '.$conditions.$parent_condition.' GROUP BY cats.id';
-        $sql_parent = 'SELECT * FROM cbk_books_categories WHERE id = "'.$id.'"';
-
-        if ( ! $sql_children_result = $this->pdo->query($sql_children) || $sql_parent_result = $this->pdo->query($sql_parent) )
-            throw new Exception($this->pdo->errorInfo()[2]);
-
-        $subcategories = $sql_children_result->fetchAll();
-        $parent_category = $sql_parent_result->fetch();
-
-        if ( count($subcategories) == 0 )
-            return null;
-
-        $total_num_books = 0;
         $result = array();
-        
-        $i = 0;
-        foreach( $subcategories as $subcategory ) {
 
-            $result['root'][$i]['info'] = $subcategory;
+        foreach ( $cats as $cat ) {
+            
+            $parent = null;
 
-            if ( $children = $this->countBooksBySubcategories($subcategory['id'], $conditions) ) {
-                $result['root'][$i]['children'] = $children['root'];
-                $result['root'][$i]['num_books'] = $subcategory['num_books'] + $children['num_books'];
-                $total_num_books += $subcategory['num_books'] + $children['num_books'];
-            } else {
-                $result['root'][$i]['children'] = null;
-                $result['root'][$i]['num_books'] = $subcategory['num_books'];
-                $total_num_books += $subcategory['num_books'];
+            if ( $cat['parent_id'] != $id && $cat['parent_id'] != NULL ) {
+
+                $parent_id = $cat['parent_id'];
+                do {
+                    
+                    $parent = $this->pdo->query('SELECT * FROM cbk_books_categories WHERE id = '.$parent_id)->fetch();
+                    $parent_id = $parent ? $parent['parent_id'] : null;
+                } 
+                while ( $parent && $parent['parent_id'] != $id && $parent['parent_id'] != NULL );
+            } else 
+                $parent = $cat;
+
+            if ( $parent['parent_id'] == $id || $id == NULL ) {
+                if ( ! isset($result[$parent['id']]) )
+                    $result[$parent['id']] = array('id' => $parent['id'], 'name' => $parent['name'], 'num_books' => (int)$cat['num_books']);
+                else
+                    $result[$parent['id']]['num_books'] += (int) $cat['num_books'];
             }
-            $i++;
         }
-
-        $result['num_books'] = $total_num_books;
-
-        return $result;   */     
+        return $result;
     }
 
     public function showBookAction() 

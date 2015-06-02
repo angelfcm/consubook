@@ -9,29 +9,13 @@
 		<div class="panel-body panel-collapse collapse in" id="collapseCategories">
 			<nav>
 				<ul class="nav nav-pills nav-stacked">
-					<?php foreach( $categories as $categorie ): ?>
-						<li role="presentation"><a role="menuitem" tabindex="-1" href="#"><?= $categorie->name ;?>
+					<?php foreach( $categories as $category ): ?>
+						<li role="presentation"><a role="menuitem" tabindex="-1" href="<?=$this->url->get(array(
+                'for'=>'search', 
+                'filter' => 'category', 
+                'query' => str_replace(' ', '+', $category->name))); ?>"><?= $category->name ;?>
 						</a></li>
 					<?php endforeach; ?>
-	
-<?php /*
-recursiveForeach($subcategories, array('parent_field' => 'info', 'children_field' => 'children'), array(
-'onBeforeChildren' => function($data, $hasChildren){
-	if ( $hasChildren ) {
-		echo '<li><a role="menuitem" tabindex="-1" data-toggle="collapse" href="#collapseSubcategories'.$data['id'].'" class="collapsed"><span class="caret"></span> '.$data['name'].'</a>';
-		echo '<div id="collapseSubcategories'.$data['id'].'" class="collapse submenu"><ul class="nav nav-pills nav-stacked">';
-	}
-	else 
-		echo '<li><a>'.$data['name'].'</a>';
-},
-'onAfterChildren' => function($data, $hasChildren){
-	if ( $hasChildren )
-		echo "</ul></div></li>";
-	else
-		echo "</li>";
-}
-));*/
-?>
 				</ul>
 			</nav>
 		</div>

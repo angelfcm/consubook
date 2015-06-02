@@ -23,6 +23,12 @@ $router->add('/search/{filter}/{query}', array( // sin diagonal final
         'action' => 'search'
 ))->setName('search');
 
+$router->add('/search/{filter}/{query}', array( // para busqueda por categorias
+        'controller' => 'books',
+        'action' => 'search'
+))->setName('search');
+
+
 $router->add('/book/{author}/{title}', array(
         'controller' => 'books',
         'action' => 'showBook'

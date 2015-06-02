@@ -53,8 +53,8 @@ class ControllerBase extends Controller
 
 		foreach( $subcategories as $subcategory ) {
 
-			$result[] = array(
-				'info' => $subcategory->toArray(),
+			$result[$subcategory->id] = array(
+				'info' => json_decode(json_encode($subcategory->toArray())),
 				'children' => $this->loadSubcategories($subcategory->id)
 			);
 		}
@@ -62,6 +62,41 @@ class ControllerBase extends Controller
 		return $result;
 	}
 
+	public function loadLineageSubategory($id)
+	{
+		$result = null;
 
+		$subcategory = CbkBooksCategories::findFirst(array(
+			'id = ?0',
+			'bind' => array($id)
+		));
+
+		if ( ! $subcategory )
+			return $result;
+
+		$result = new StdClass();
+
+		$result->info = json_decode(json_encode($subcategory->toArray()));
+		
+		$last = $result;
+		while($subcategory->parent_id != NULL) {
+
+			$subcategory = CbkBooksCategories::findFirst(array(
+				'id = ?0',
+				'bind' => array($subcategory->parent_id)
+			));
+
+			$parent = new StdClass();
+			$parent->info = json_decode(json_encode($subcategory->toArray()));
+
+			$children = $result;
+			$result = $parent;
+			$result->next = $children;
+		}
+
+		$last->next = null;
+
+		return $result;
+	}
 
 }

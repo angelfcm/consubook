@@ -33,7 +33,11 @@
 	    					</a>
 	  						<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
 							<?php foreach( $categories as $category ): ?>
-								<li role="presentation"><a role="menuitem" tabindex="-1" href="#"><?= $category->name ;?>
+								<li role="presentation"><a role="menuitem" tabindex="-1" href="<?=$this->url->get(array(
+                'for'=>'search', 
+                'filter' => 'category', 
+                'query' => str_replace(' ', '+', $category->name))); ?>
+                "><?= $category->name ;?>
 								</a></li>
 							<?php endforeach; ?>
 							</ul>

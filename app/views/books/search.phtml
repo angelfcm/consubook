@@ -1,9 +1,7 @@
 <main class="col-md-9 col-md-push-3">
-
 <div id="searchBooks">
 
 <?php if (count($books) > 0): /*==== if books ====*/ ?>
-
 <div class="page-header">
 	<h1>
 	<?php 
@@ -32,6 +30,7 @@
 	<form class="form-inline" action="" method="GET">
 		<div class="form-group">
 			<input type="hidden" name="dir" value="<?=$orderDirection;?>" />
+			<input type="hidden" name="category" value="<?=$category_id;?>" />
 			<label form="searhOrderBy">Ordernar por</label>
 			<select id="searhOrderBy" name="order" onchange="this.form.submit()">
 <?php 
@@ -39,7 +38,8 @@
 		'relevance' => 'Relevancia',
 		'title' => 'Título',
 		'author' => 'Autor',
-		'editorial' => 'Editorial'
+		'editorial' => 'Editorial',
+		'category' => 'Categoría'
 	);
 
 foreach( $this->config->search->filtersOrder as $filterOrder ):?>
@@ -47,7 +47,7 @@ foreach( $this->config->search->filtersOrder as $filterOrder ):?>
 				<option value="<?=$filterOrder;?>" <?=$filterOrder==$orderBy?'selected':'';?>><?=isset($filters_str[$filterOrder])?$filters_str[$filterOrder]:$filterOrder;?></option>
 <?php endif; endforeach; ?>
 			</select>
-			<a href="<?= $this->url->get(array('for'=>'search', 'filter' => $filter, 'query' => $query_link, 'page' => $currentPage))."?order=".$orderBy."&dir=".($orderDirection=='asc'?'desc':'asc');?>"><span class="glyphicon glyphicon-arrow-<?=$orderDirection=='asc'?'down':'up';?>"></span></a>
+			<a href="<?=$getUrlSearch(array('orderDirection' => ($orderDirection=='asc'?'desc':'asc')));?>"><span class="glyphicon glyphicon-arrow-<?=$orderDirection=='asc'?'down':'up';?>"></span></a>
 		</div>
 	</form>
 </div>
@@ -99,7 +99,7 @@ foreach( $this->config->search->filtersOrder as $filterOrder ):?>
 	  <ul class="pagination">
 	<?php if( $currentPage > 1 ):?>
 	    <li class="pull-left">
-	      <a href="<?= $this->url->get(array('for'=>'search', 'filter' => $filter, 'query' => $query_link, 'page' => $currentPage-1))."?order=".$orderBy."&dir=".$orderDirection;?>" aria-label="Previous">
+	      <a href="<?= $getUrlSearch(array('page' => $currentPage-1)); ?>" aria-label="Previous">
 	        <span aria-hidden="true" class="glyphicon glyphicon-backward"></span>
 	      </a>
 	    </li>
@@ -125,12 +125,12 @@ foreach( $this->config->search->filtersOrder as $filterOrder ):?>
 		for ( $page = $startPage; $page <= $endPage; $page++ ): 
 	?>
 		<li <?= $page == $currentPage? 'class="active"' : ''; ?>>
-			<a href="<?= $this->url->get(array('for'=>'search', 'filter' => $filter, 'query' => $query_link, 'page' => $page))."?order=".$orderBy."&dir=".$orderDirection;?>"><?=$page;?></a>
+			<a href="<?= $getUrlSearch(array('page' => $page)); ?>"><?=$page;?></a>
 		</li>
 	<?php endfor; /*==== end print pages ====*/ ?>
 	<?php if( $currentPage < $totalPages ):?>
 	    <li class="pull-right">
-	      <a href="<?= $this->url->get(array('for'=>'search', 'filter' => $filter, 'query' => $query_link, 'page' => $currentPage+1))."?order=".$orderBy."&dir=".$orderDirection;?>" aria-label="Next">
+	      <a href="<?= $getUrlSearch(array('page' => $currentPage+1)); ?>" aria-label="Next">
 	        <span aria-hidden="true" class="glyphicon glyphicon-forward"></span>
 	      </a>
 	    </li>
@@ -157,10 +157,29 @@ foreach( $this->config->search->filtersOrder as $filterOrder ):?>
 			<h1 class="panel-title"><a data-toggle="collapse" href="#collapseCategories">Categorías</a></h1>
 		</header>
 		<div class="panel-body panel-collapse collapse in" id="collapseCategories">
+			<ol class="breadcrumb">
+				<?php 
+					if ( $lineageCategory ) {
+						echo '<li><a href="'.$getUrlSearch(array('page'=>1, 'category_id'=>false, 'query' => ($filter == 'category' ? 'all' : $query))).'">Principal</a></li>';
+					}
+					else {
+						echo '<li class="active">Principal</li>';
+					}
+					$cat = $lineageCategory;
+					while ( $cat ) {
+						if ( $cat->next ) {
+							echo '<li><a href="'.$getUrlSearch(array('page'=>1, 'category_id'=>$cat->info->id, 'query' => ($filter == 'category' ? $cat->info->name : $query))).'">'.$cat->info->name.'</a></li>';
+						} else {
+							echo '<li class="active">'.$cat->info->name.'</li>';
+						}
+						$cat = $cat->next;
+					}
+				?>
+			</ol>
 			<nav>
 				<ul class="nav nav-pills nav-stacked">
-					<?php foreach( $books_categories->root as $category ): ?>
-						<li role="presentation"><a role="menuitem" tabindex="-1" href="#"><?= $category->info->name ;?> (<?= $category->num_books ;?>)
+					<?php foreach( $books_categories as $category ): ?>
+						<li role="presentation"><a role="menuitem" tabindex="-1" href="<?= $getUrlSearch(array('page'=>1, 'category_id'=>$category->id, 'query' => $filter == 'category' ? $category->name : $query));?>"><?= $category->name ;?> (<?= $category->num_books ;?>)
 						</a></li>
 					<?php endforeach; ?>
 				</ul>
