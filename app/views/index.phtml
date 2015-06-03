@@ -70,7 +70,7 @@
 	      				<img alt="Brand" src="<?= $this->url->get($this->config['consubook']['http_logo']); ?>" />
 	      			</a>
    			 	</div>
-   			 	<form class="navbar-form inline-block-middle" role="search" name="quickSearchForm" id="quickSearchForm" ng-submit="doSearch()" ng-controller="search" method="GET" ng-init="search.query = <?= "'".addslashes($this->dispatcher->getParam('query'))."'"; ?>; search.filter = <?= "'".addslashes($this->dispatcher->getParam('filter'))."'"; ?> ">
+   			 	<form class="navbar-form inline-block-middle" role="search" name="quickSearchForm" id="quickSearchForm" ng-submit="doSearch()" ng-controller="search" method="GET" ng-init="search.query = <?= "'".addslashes($this->dispatcher->getParam('query') && $this->dispatcher->getParam('filter') != 'category' ? $this->dispatcher->getParam('query') : "")."'"; ?>; search.filter = <?= "'".addslashes($this->dispatcher->getParam('filter'))."'"; ?> ">
 					<div class="form-group">
 					    <div class="input-group">
 					    	<span class="input-group-btn dropdown" id="dropdown-search-by">
@@ -80,7 +80,7 @@
 					    		<ul class="dropdown-menu" style="width: 220px; text-align: center;">
 									<div class="btn-group" data-toggle="buttons">
 									  	<label class="btn btn-primary">
-									   		<input type="radio" name="filter" ng-model="search.filter" value="title" <?= $this->dispatcher->getParam('filter') ? '' : 'checked';?>>Título
+									   		<input type="radio" name="filter" ng-model="search.filter" value="title" <?= $this->dispatcher->getParam('filter') && $this->dispatcher->getParam('filter') != 'category' ? '' : 'checked';?>>Título
 									  	</label>
 									  	<label class="btn btn-primary">
 									    	<input type="radio" name="filter" ng-model="search.filter" value="author">Autor

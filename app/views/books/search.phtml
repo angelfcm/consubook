@@ -8,16 +8,21 @@
 		$output = "<small>Resultados encontrados para";
 		switch( $filter ) {
 			case 'title': 
-				$output .= " el título";
+				$output .= " el título</small> \"<i>{$query}</i>\"";
 			break;
 			case 'author':
-				$output .= " el autor";
+				$output .= " el autor</small> \"<i>{$query}</i>\"";
 			break;
 			case 'editorial':
-				$output .= " la editorial";
+				$output .= " la editorial</small> \"<i>{$query}</i>\"";
+			break;
+			case 'category':
+				if ( $query=='all' )
+					$output .= " todas las categorías \"<i>principales</i>\"</small>";
+				else
+					$output .= " la categoría</small> \"<i>{$query}</i>\"";
 			break;
 		}
-		$output .= "</small> \"<i>{$query}</i>\"";
 		echo $output;
 	?>
 	</h1>
@@ -178,7 +183,7 @@ foreach( $this->config->search->filtersOrder as $filterOrder ):?>
 			</ol>
 			<nav>
 				<ul class="nav nav-pills nav-stacked">
-					<?php foreach( $books_categories as $category ): ?>
+					<?php if ( $books_categories ) foreach( $books_categories as $category ): ?>
 						<li role="presentation"><a role="menuitem" tabindex="-1" href="<?= $getUrlSearch(array('page'=>1, 'category_id'=>$category->id, 'query' => $filter == 'category' ? $category->name : $query));?>"><?= $category->name ;?> (<?= $category->num_books ;?>)
 						</a></li>
 					<?php endforeach; ?>
